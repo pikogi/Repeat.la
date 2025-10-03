@@ -1,53 +1,49 @@
 "use client"
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Tagline } from "@/components/pro-blocks/landing-page/tagline"
+import Image from "next/image"
+import Link from "next/link"
 
-export function StatsSection4() {
+export function WalletCallout() {
   return (
-    <section className="bg-background section-padding-y border-b">
-      <div className="container-padding-x container mx-auto">
-        <div className="flex flex-col gap-10 md:gap-12">
-          <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-            <Tagline>Repeat en acción</Tagline>
-            <h2 className="heading-lg text-foreground">Personaliza tu club con tu identidad</h2>
-            <p className="text-muted-foreground">
-              Único, estético y claro. Diseña tu programa de fidelización a tu medida.
-            </p>
-          </div>
+    <section className="bg-white section-padding-y border-b">
+      <div className="container-padding-x container mx-auto flex flex-col items-center text-center gap-10 md:gap-12">
+        <h1 className="text-black text-4xl md:text-5xl font-bold">
+          Sin necesidad de tarjetas físicas 🚀
+        </h1>
+        <p className="text-black text-lg md:text-xl">
+          Integrado con Apple y Google Wallet 📲
+        </p>
+        <p className="text-black text-lg md:text-xl border-2 border-black px-4 py-2 rounded-lg inline-block">
+          ¡Descarga ahora la tuya y probala en tu teléfono! 👇
+        </p>
 
-          <div className="flex flex-col gap-4 md:gap-6 lg:flex-row">
-            <Card className="bg-secondary rounded-xl border-none p-6 shadow-none">
-              <CardContent className="flex flex-col gap-2 p-0 md:gap-3">
-                <h3 className="text-primary font-semibold">Sin tarjetas físicas</h3>
-                <span className="text-foreground text-3xl font-semibold md:text-4xl">100%</span>
-
-                <p className="text-muted-foreground text-base">
-                  Digital. Todo en la billetera virtual de tus clientes con Apple y Google Wallet.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-secondary rounded-xl border-none p-6 shadow-none">
-              <CardContent className="flex flex-col gap-2 p-0 md:gap-3">
-                <h3 className="text-primary font-semibold">Configuración</h3>
-                <span className="text-foreground text-3xl font-semibold md:text-4xl">5 min</span>
-                <p className="text-muted-foreground text-base">
-                  Tu club de fidelidad listo en minutos. Sin complicaciones técnicas.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-secondary rounded-xl border-none p-6 shadow-none">
-              <CardContent className="flex flex-col gap-2 p-0 md:gap-3">
-                <h3 className="text-primary font-semibold">Retención</h3>
-                <span className="text-foreground text-3xl font-semibold md:text-4xl">+80%</span>
-                <p className="text-muted-foreground text-base">
-                  Aumenta la retención de clientes con un programa de fidelización efectivo.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+        <div className="flex gap-6 items-center">
+          <Link
+            href="https://app.repeat.la/tester-restaurant/pos/61c0658be9d8960ab9e789cd/promo/6827f2f4fc2905dab9c7c95f"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/apple.png"
+              alt="Apple Wallet"
+              width={192}
+              height={64}
+              className="w-40 md:w-48 h-auto animate-bounce-slow"
+            />
+          </Link>
+          <Link
+            href="https://app.repeat.la/tester-restaurant/pos/61c0658be9d8960ab9e789cd/promo/6827f2f4fc2905dab9c7c95f"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Image
+              src="/google.png"
+              alt="Google Wallet"
+              width={192}
+              height={64}
+              className="w-40 md:w-48 h-auto object-contain animate-bounce-slow"
+            />
+          </Link>
         </div>
       </div>
     </section>

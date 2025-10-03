@@ -81,8 +81,8 @@
   --popover-foreground: oklch(0.282 0.087 267.935);
   --primary: oklch(0 0 0); /* antes naranja */
   --primary-foreground: oklch(0 0 0);
-  --secondary: oklch(0.981 0.009 258.335);
-  --secondary-foreground: oklch(0.282 0.087 267.935);
+  --secondary: #765502;
+  --secondary-foreground: #000000;
   --muted: oklch(0.984 0.003 247.858);
   --muted-foreground: oklch(0.516 0.054 272.586);
   --accent: oklch(0 0 0); /* antes azul */
@@ -232,4 +232,12 @@
 }
 header {
   background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8));
+}
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 1.5s infinite;
 }

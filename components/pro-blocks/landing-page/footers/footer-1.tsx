@@ -7,17 +7,23 @@ import { Separator } from "@/components/ui/separator";
 export function Footer1() {
   return (
     <footer
-      className="bg-background section-padding-y"
+      className="bg-background section-padding-y bg-cover bg-center bg-no-repeat"
       role="contentinfo"
       aria-label="Site footer"
     >
       <div className="container-padding-x container mx-auto flex flex-col gap-12 lg:gap-16">
+
         {/* Top Section */}
-        <div className="flex w-full flex-col items-center gap-12 text-center">
-          {/* Logo Section */}
-          <Link href="/" aria-label="Go to homepage">
-            <Logo />
-          </Link>
+        <div className="flex w-full flex-col items-center gap-6 text-center">
+
+          {/* Imagen arriba de la línea */}
+          <div className="mb-6 w-full h-64 md:h-80 lg:h-96">
+  <img
+    src="/repeat4.jpg"
+    alt="Footer Image"
+    className="w-full h-full object-cover"
+  />
+</div>
 
           {/* Main Navigation */}
           <nav
@@ -69,6 +75,7 @@ export function Footer1() {
 
         {/* Bottom Section */}
         <div className="flex w-full flex-col-reverse items-center gap-12 text-sm lg:flex-row lg:justify-between lg:gap-6">
+          
           {/* Copyright Text */}
           <p className="text-muted-foreground text-center lg:text-left">
             Built with{" "}
