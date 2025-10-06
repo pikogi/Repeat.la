@@ -6,6 +6,7 @@ import { ModernFeatures } from "@/components/pro-blocks/landing-page/bento-grids
 import { FeatureSection9 } from "@/components/pro-blocks/landing-page/feature-sections/feature-section-9"
 import { WalletCallout } from "@/components/pro-blocks/landing-page/stats-sections/stats-section-4"
 import { CustomerDataSection } from "@/components/pro-blocks/landing-page/CustomerDataSection/CustomerDataSection" // <-- import nueva sección
+import { Cardsection } from "@/components/pro-blocks/landing-page/card-section/card-section" // <-- import nueva sección
 import { PricingSection3 } from "@/components/pro-blocks/landing-page/pricing-sections/pricing-section-3"
 import { FaqSection2 } from "@/components/pro-blocks/landing-page/faq-sections/faq-section-2"
 import { Footer1 } from "@/components/pro-blocks/landing-page/footers/footer-1"
@@ -32,6 +33,7 @@ export default function Page() {
         avatarSrc="/gianni2.jpg"
       />
       <CustomerDataSection />
+      <Cardsection />
       <PricingSection3 />
       <FaqSection2 />
       <Footer1 />

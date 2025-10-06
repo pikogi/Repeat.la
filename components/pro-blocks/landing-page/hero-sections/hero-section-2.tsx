@@ -82,12 +82,14 @@ export function HeroSection2() {
               </a>
             </Button>
             <Button
-              variant="ghost"
-              className="text-black bg-yellow-400 hover:bg-black hover:text-white lg:px-10 lg:py-5 lg:text-lg rounded-lg"
-            >
-              Cómo funciona
-              <ArrowRight />
-            </Button>
+  variant="ghost"
+  className="text-black bg-yellow-400 hover:bg-black hover:text-white lg:px-10 lg:py-5 lg:text-lg rounded-lg"
+  asChild
+>
+  <a href="#features">
+    Cómo funciona <ArrowRight />
+  </a>
+</Button>
           </div>
         </div>
       </div>

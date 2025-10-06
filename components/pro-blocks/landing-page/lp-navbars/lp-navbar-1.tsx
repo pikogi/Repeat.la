@@ -7,10 +7,8 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 
 const MENU_ITEMS = [
-  { label: "Features", href: "#features" },
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Docs", href: "https://www.shadcndesign.com/pro-blocks" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Cómo funciona", href: "#features" },
+  { label: "Precios", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
 ] as const;
 
@@ -62,7 +60,7 @@ export function LpNavbar1() {
         <div className="hidden w-full flex-row justify-end gap-5 md:flex">
           <NavMenuItems />
           <Link href="#pricing">
-            <Button className="text-black bg-yellow-500 hover:text-white">Try for free</Button>
+            <Button className="text-black bg-yellow-500 hover:text-white">Prueba Gratis</Button>
           </Link>
         </div>
 
@@ -71,7 +69,7 @@ export function LpNavbar1() {
           <div className="flex w-full flex-col justify-end gap-5 pb-2.5 md:hidden">
             <NavMenuItems />
             <Link href="#pricing">
-              <Button className="w-full">Try for free</Button>
+              <Button className="w-full">Prueba Gratis</Button>
             </Link>
           </div>
         )}

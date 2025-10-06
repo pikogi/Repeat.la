@@ -7,119 +7,72 @@ import { Separator } from "@/components/ui/separator";
 export function Footer1() {
   return (
     <footer
-      className="bg-background section-padding-y bg-cover bg-center bg-no-repeat"
+      className="relative section-padding-y bg-cover bg-center bg-no-repeat text-white"
       role="contentinfo"
       aria-label="Site footer"
+      style={{ backgroundImage: "url('/repeat4.jpg')" }}
     >
-      <div className="container-padding-x container mx-auto flex flex-col gap-12 lg:gap-16">
+      {/* Overlay oscuro para mejorar contraste */}
+      <div className="absolute inset-0 bg-black/50" />
+
+      <div className="relative container-padding-x container mx-auto flex flex-col gap-12 lg:gap-16">
 
         {/* Top Section */}
         <div className="flex w-full flex-col items-center gap-6 text-center">
-
-          {/* Imagen arriba de la línea */}
-          <div className="mb-6 w-full h-64 md:h-80 lg:h-96">
-  <img
-    src="/repeat4.jpg"
-    alt="Footer Image"
-    className="w-full h-full object-cover"
-  />
-</div>
-
           {/* Main Navigation */}
           <nav
             className="flex flex-col items-center gap-6 text-sm md:flex-row md:gap-8"
             aria-label="Footer navigation"
           >
-            <Link
-              href="/"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
+            <Link href="/" className="hover:text-gray-200 transition-colors">
               Home
             </Link>
-            <Link
-              href="#features"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Features
+            <Link href="#features" className="hover:text-gray-200 transition-colors">
+              Cómo funciona
             </Link>
-            <Link
-              href="#how-it-works"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              How it works
-            </Link>
-            <Link
-              href="https://www.shadcndesign.com/pro-blocks"
-              target="_blank"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Docs
-            </Link>
-            <Link
-              href="#faq"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
+            <Link href="#faq" className="hover:text-gray-200 transition-colors">
               FAQ
             </Link>
-            <Link
-              href="#pricing"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Pricing
+            <Link href="#pricing" className="hover:text-gray-200 transition-colors">
+              Precios
             </Link>
           </nav>
         </div>
 
-        {/* Section Divider */}
-        <Separator role="presentation" />
+        {/* Divider */}
+        <Separator role="presentation" className="bg-white/30" />
 
         {/* Bottom Section */}
         <div className="flex w-full flex-col-reverse items-center gap-12 text-sm lg:flex-row lg:justify-between lg:gap-6">
           
-          {/* Copyright Text */}
-          <p className="text-muted-foreground text-center lg:text-left">
-            Built with{" "}
-            <Link
-              href="https://www.shadcndesign.com/pro-blocks"
-              className="underline"
-              target="_blank"
-            >
-              Pro Blocks
-            </Link>{" "}
-            by{" "}
-            <Link
-              href="https://www.shadcndesign.com/"
-              className="underline"
-              target="_blank"
-            >
-              shadcndesign.com
-            </Link>
-            . All rights reserved.
+          {/* Copyright */}
+          <p className="text-center lg:text-left text-white/80">
+            Built with 🧠 in Córdoba.  All rights reserved. 2025
           </p>
 
-          {/* Legal Navigation */}
+          {/* Legal Links */}
           <nav
             className="flex flex-col items-center gap-6 text-sm md:flex-row md:gap-8"
             aria-label="Legal links"
           >
             <Link
-              href="https://www.shadcndesign.com/pro-blocks"
+              href="#footer"
               target="_blank"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="hover:text-gray-200 transition-colors"
             >
               Privacy Policy
             </Link>
             <Link
-              href="https://www.shadcndesign.com/pro-blocks"
+              href="#footer"
               target="_blank"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="hover:text-gray-200 transition-colors"
             >
               Terms of Service
             </Link>
             <Link
-              href="https://www.shadcndesign.com/pro-blocks"
+              href="#footer"
               target="_blank"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="hover:text-gray-200 transition-colors"
             >
               Cookies Settings
             </Link>

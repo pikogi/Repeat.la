@@ -9,10 +9,12 @@ const onest = Onest({
 });
 
 export const metadata: Metadata = {
-  title: "MindSpace - template built with shadcndesign.com",
+  title: "Repeat",
   description:
-    "MindSpace is a modern and clean SaaS shadcn/ui template built with Pro Blocks",
-    generator: 'v0.app'
+    "Repeat what your clients love!",
+    icons: {
+      icon: "/repeatlogo.png", // ruta de tu favicon
+    },
 };
 
 export default function RootLayout({

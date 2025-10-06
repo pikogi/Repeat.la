@@ -81,7 +81,7 @@
   --popover-foreground: oklch(0.282 0.087 267.935);
   --primary: oklch(0 0 0); /* antes naranja */
   --primary-foreground: oklch(0 0 0);
-  --secondary: #765502;
+  --secondary: #000000;
   --secondary-foreground: #000000;
   --muted: oklch(0.984 0.003 247.858);
   --muted-foreground: oklch(0.516 0.054 272.586);
@@ -240,4 +240,25 @@ header {
 
 .animate-bounce-slow {
   animation: bounce-slow 1.5s infinite;
+}
+.underline-animation {
+  position: relative;
+}
+
+.underline-animation::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.1em;
+  width: 100%;
+  height: 0.35em;
+  background: #FACC15; /* amarillo */
+  border-radius: 9999px;
+  transform: skewX(-12deg);
+  z-index: -1;
+  transition: transform 0.3s ease;
+}
+
+.underline-animation:hover::after {
+  transform: skewX(-12deg) scaleX(1.05);
 }

@@ -6,14 +6,12 @@ interface TestimonialsSection1Props {
   quote?: string;
   authorName?: string;
   authorRole?: string;
-  avatarSrc?: string;
 }
 
 export default function TestimonialsSection1({
   quote = "MindSpace is like having a photographic memory for every meeting. We reduced the follow-up emails by 80%.",
   authorName = "David Park",
   authorRole = "Engineering Manager at TechCorp",
-  avatarSrc = "/gianni1.jpg",
 }: TestimonialsSection1Props) {
   return (
     <section
@@ -32,10 +30,6 @@ export default function TestimonialsSection1({
 
         {/* Author Information */}
         <div className="flex flex-col items-center gap-4">
-          {/* Author Avatar */}
-          <Avatar className="h-12 w-12 rounded-xl ring-2 ring-white md:h-14 md:w-14">
-            <AvatarImage src={avatarSrc} alt={authorName} />
-          </Avatar>
 
           {/* Author Details */}
           <div className="flex flex-col items-center gap-1 md:flex-row md:gap-2">
