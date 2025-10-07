@@ -21,7 +21,6 @@ export default function Page() {
         quote="Repeat transformó completamente nuestro negocio. Ahora tenemos una base de datos de más de 500 clientes y podemos hacer campañas personalizadas."
         authorName="María González"
         authorRole="Dueña de Café Central"
-        avatarSrc="/gianni1.jpg"
       />
       <ModernFeatures/>
       <FeatureSection9 />
@@ -30,7 +29,6 @@ export default function Page() {
         quote="La implementación fue súper rápida y nuestros clientes aman tener la tarjeta en su celular. Ya no se olvidan de traerla."
         authorName="Carlos Martínez"
         authorRole="Gerente de Peluquería Estilo"
-        avatarSrc="/gianni2.jpg"
       />
       <CustomerDataSection />
       <Cardsection />

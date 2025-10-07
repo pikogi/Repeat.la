@@ -1,10 +1,29 @@
-"use client"
+"use client";
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import Link from "next/link"
-import { Tagline } from "@/components/pro-blocks/landing-page/tagline"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import Link from "next/link";
+import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
+import { useCountry } from "@/app/context/CountryContext";
 
 export function FaqSection2() {
+  const { country } = useCountry(); // "ar" | "mx" | "us"
+
+  const whatsappNumbers: Record<string, string> = {
+    mx: "5215543219876",
+    ar: "5491150389694",
+    us: "1234567890",
+  };
+
+  const whatsappMessages: Record<string, string> = {
+    mx: "¡Hola! Quiero agendar una demo desde México.",
+    ar: "¡Hola! Quiero agendar una demo desde Argentina.",
+    us: "Hi! I want to schedule a demo from the USA.",
+  };
+
+  const contactoLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
+    whatsappMessages[country]
+  )}`;
+
   return (
     <section className="bg-gray-100 section-padding-y border-b text-black" aria-labelledby="faq-heading" id="faq">
       <div className="container-padding-x container mx-auto">
@@ -19,8 +38,13 @@ export function FaqSection2() {
             </h1>
             {/* Section Description */}
             <p className="text-black">
-              ¿Quieres agendar una demo? Completa el formulario y en breve nuestro equipo se pondrá en contacto contigo.{" "}
-              <Link href="https://wa.me/+5493517881653" className="text-black underline">
+              ¿Quieres agendar una demo? Contáctanos por WhatsApp y en breve nuestro equipo se pondrá en contacto contigo.{" "}
+              <Link
+                href={contactoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-black underline"
+              >
                 Contáctanos
               </Link>
             </p>
@@ -34,7 +58,7 @@ export function FaqSection2() {
               <h2 className="text-black text-lg font-semibold md:text-xl">General</h2>
               {/* FAQ Accordion */}
               <Accordion type="single" collapsible aria-label="General FAQ items">
-                {/* FAQ Item 1 */}
+                {/* FAQ Items */}
                 <AccordionItem value="item-1">
                   <AccordionTrigger className="text-left text-black">
                     ¿Cómo funciona el programa de fidelización?
@@ -46,7 +70,6 @@ export function FaqSection2() {
                   </AccordionContent>
                 </AccordionItem>
 
-                {/* FAQ Item 2 */}
                 <AccordionItem value="item-2">
                   <AccordionTrigger className="text-left text-black">¿Necesito tarjetas físicas?</AccordionTrigger>
                   <AccordionContent className="text-black">
@@ -56,7 +79,6 @@ export function FaqSection2() {
                   </AccordionContent>
                 </AccordionItem>
 
-                {/* FAQ Item 3 */}
                 <AccordionItem value="item-3">
                   <AccordionTrigger className="text-left text-black">¿Puedo personalizar mi programa?</AccordionTrigger>
                   <AccordionContent className="text-black">
@@ -65,7 +87,6 @@ export function FaqSection2() {
                   </AccordionContent>
                 </AccordionItem>
 
-                {/* FAQ Item 4 */}
                 <AccordionItem value="item-4">
                   <AccordionTrigger className="text-left text-black">¿Qué datos obtengo de mis clientes?</AccordionTrigger>
                   <AccordionContent className="text-black">
@@ -79,11 +100,8 @@ export function FaqSection2() {
 
             {/* Pricing FAQ Section */}
             <div className="flex flex-col gap-2">
-              {/* Section Title */}
               <h2 className="text-black text-lg font-semibold md:text-xl">Precios</h2>
-              {/* FAQ Accordion */}
               <Accordion type="single" collapsible aria-label="Billing FAQ items">
-                {/* FAQ Item 1 */}
                 <AccordionItem value="billing-1">
                   <AccordionTrigger className="text-left text-black">
                     ¿Cómo funciona la prueba gratuita?
@@ -95,7 +113,6 @@ export function FaqSection2() {
                   </AccordionContent>
                 </AccordionItem>
 
-                {/* FAQ Item 2 */}
                 <AccordionItem value="billing-2">
                   <AccordionTrigger className="text-left text-black">¿Cuánto tiempo toma implementarlo?</AccordionTrigger>
                   <AccordionContent className="text-black">
@@ -104,7 +121,6 @@ export function FaqSection2() {
                   </AccordionContent>
                 </AccordionItem>
 
-                {/* FAQ Item 3 */}
                 <AccordionItem value="billing-3">
                   <AccordionTrigger className="text-left text-black">¿Hay límite de clientes?</AccordionTrigger>
                   <AccordionContent className="text-black">
@@ -113,7 +129,6 @@ export function FaqSection2() {
                   </AccordionContent>
                 </AccordionItem>
 
-                {/* FAQ Item 4 */}
                 <AccordionItem value="billing-4">
                   <AccordionTrigger className="text-left text-black">¿Ofrecen soporte técnico?</AccordionTrigger>
                   <AccordionContent className="text-black">
@@ -127,5 +142,5 @@ export function FaqSection2() {
         </div>
       </div>
     </section>
-  )
+  );
 }

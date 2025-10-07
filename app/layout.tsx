@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Onest } from "next/font/google";
 import "./globals.css";
+import { CountryProvider } from "./context/CountryContext"; // importa el provider
 
 const onest = Onest({
   subsets: ["latin"],
@@ -10,11 +11,10 @@ const onest = Onest({
 
 export const metadata: Metadata = {
   title: "Repeat",
-  description:
-    "Repeat what your clients love!",
-    icons: {
-      icon: "/repeatlogo.png", // ruta de tu favicon
-    },
+  description: "Repeat what your clients love!",
+  icons: {
+    icon: "/repeatlogo.png",
+  },
 };
 
 export default function RootLayout({
@@ -27,7 +27,9 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <head />
         <body className={`${onest.variable} relative antialiased`}>
-          {children}
+          <CountryProvider>
+            {children}
+          </CountryProvider>
         </body>
       </html>
     </>

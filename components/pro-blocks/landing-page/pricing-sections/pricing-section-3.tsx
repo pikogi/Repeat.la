@@ -1,5 +1,6 @@
 "use client"
-import { useState } from "react"
+
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Check, Info } from "lucide-react"
@@ -10,6 +11,7 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip"
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline"
+import { getUserCountry } from "@/geolocation"
 
 const pricingData = {
   plans: [
@@ -23,9 +25,8 @@ const pricingData = {
         { name: "Escaneo QR", tooltip: "Sistema de escaneo rápido y fácil" },
         { name: "Reportes básicos", tooltip: "Estadísticas de uso y clientes" },
       ],
-      monthlyPrice: 400,
-      annualPricePerMonth: 333, // 2 meses de regalo
-      variant: "bg-black",
+      monthlyPrice: { ar: 4000, mx: 499, us: 19 },
+      annualPricePerMonth: { ar: 3333, mx: 420, us: 16 },
     },
     {
       name: "Pro",
@@ -38,9 +39,8 @@ const pricingData = {
         { name: "Múltiples sucursales", tooltip: "Gestiona varias ubicaciones desde un panel" },
         { name: "Soporte prioritario", tooltip: "Asistencia rápida vía WhatsApp" },
       ],
-      monthlyPrice: 650,
-      annualPricePerMonth: 541, // 2 meses de regalo
-      variant: "text-white bg-black",
+      monthlyPrice: { ar: 6500, mx: 899, us: 25 },
+      annualPricePerMonth: { ar: 5416, mx: 749, us: 20 },
       highlighted: true,
     },
   ],
@@ -48,7 +48,41 @@ const pricingData = {
 
 export function PricingSection3() {
   const [billingCycle, setBillingCycle] = useState<"mensual" | "anual">("mensual")
+  const [country, setCountry] = useState<"ar" | "mx" | "us">("ar")
 
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const paramCountry = urlParams.get("country")?.toLowerCase()
+    if (paramCountry === "ar" || paramCountry === "mx" || paramCountry === "us") {
+      setCountry(paramCountry)
+    } else {
+      getUserCountry().then((c) => {
+        if (c === "ar" || c === "mx" || c === "us") setCountry(c)
+      })
+    }
+  }, [])
+
+  const whatsappNumbers: Record<string, string> = {
+    mx: "5215543219876",
+    ar: "5491150389694",
+    us: "1234567890",
+  }
+
+  const whatsappMessages: Record<string, string> = {
+    mx: "¡Hola! Quiero comenzar mi prueba gratuita desde México.",
+    ar: "¡Hola! Quiero comenzar mi prueba gratuita desde Argentina.",
+    us: "Hi! I want to start my free trial from the USA.",
+  };
+
+const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
+  whatsappMessages[country]
+)}`;
+
+
+  const currencySymbol: Record<string, string> = { mx: "$", ar: "$", us: "$" }
+  const currencySuffix: Record<string, string> = { mx: "MXN", ar: "ARS", us: "USD" }
+
+  
   return (
     <section
       className="bg-white text-black section-padding-y border-b"
@@ -57,7 +91,7 @@ export function PricingSection3() {
     >
       <div className="container-padding-x container mx-auto">
         <div className="flex flex-col items-center gap-10 md:gap-12">
-          {/* Section Header */}
+          {/* Header */}
           <div className="section-title-gap-lg flex max-w-xl flex-col items-center text-center">
             <Tagline className="text-red-500 text-lg md:text-xl">Precios</Tagline>
             <h2 id="pricing-section-title-3" className="heading-lg text-black">
@@ -94,11 +128,16 @@ export function PricingSection3() {
             {pricingData.plans.map((plan, index) => {
               const isAnnual = billingCycle === "anual"
               const displayedPrice = isAnnual
-                ? plan.annualPricePerMonth
-                : plan.monthlyPrice
+                ? plan.annualPricePerMonth[country]
+                : plan.monthlyPrice[country]
               const periodText = isAnnual
-                ? "/mes (facturado anualmente)"
-                : "/mes"
+                ? `/mes (facturado anualmente)`
+                : `/mes`
+
+              const formattedPrice = new Intl.NumberFormat("es-AR", {
+                style: "decimal",
+                minimumFractionDigits: 0,
+              }).format(displayedPrice)
 
               return (
                 <Card
@@ -110,7 +149,7 @@ export function PricingSection3() {
                   }`}
                 >
                   <CardContent className="flex flex-col gap-8 p-0 text-black">
-                    {/* Plan Header */}
+                    {/* Header */}
                     <div className="flex flex-col gap-6">
                       <div className="relative flex flex-col gap-3">
                         <h3
@@ -127,34 +166,32 @@ export function PricingSection3() {
                       <div className="flex flex-col text-black">
                         <div className="flex items-end gap-0.5">
                           <span className="text-4xl font-semibold">
-                            ${displayedPrice}
+                            {currencySymbol[country]}{formattedPrice}
                           </span>
-                          <span className="text-base ml-1">{periodText}</span>
+                          <span className="text-base ml-1">{periodText} {currencySuffix[country]}</span>
                         </div>
                         {isAnnual && (
                           <p className="text-xs text-gray-700 mt-1">
-                            Pago total: ${displayedPrice * 12} MXN/año
+                            Pago total: {currencySymbol[country]}
+                            {new Intl.NumberFormat("es-AR", { minimumFractionDigits: 0 }).format(displayedPrice*12)} {currencySuffix[country]}/año
                           </p>
                         )}
                       </div>
 
-                      {/* CTA Button */}
-                      <Button
-                        className={`w-full ${
-                          plan.name === "Básico"
-                            ? "bg-black text-white border border-black hover:bg-white hover:text-black"
-                            : "bg-black text-white border border-black hover:bg-white hover:text-black"
-                        }`}
-                        asChild
-                      >
-                        <a
-                          href="https://wa.me/5491150389694"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Comenzar ahora
-                        </a>
-                      </Button>
+                      {/* CTA */}
+                      {/* CTA */}
+<Button
+  className="w-full bg-black text-white border border-black hover:bg-white hover:text-black"
+  asChild
+>
+  <a
+    href={pruebaGratisLink} // <-- usar la variable correcta
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Comenzar ahora
+  </a>
+</Button>
                     </div>
 
                     {/* Features */}
@@ -168,9 +205,7 @@ export function PricingSection3() {
                         {plan.features.map((feature, i) => (
                           <div key={i} className="flex items-center gap-3">
                             <Check className="h-5 w-5 text-primary" />
-                            <span className="flex-1 text-sm text-black">
-                              {feature.name}
-                            </span>
+                            <span className="flex-1 text-sm text-black">{feature.name}</span>
                             <TooltipProvider>
                               <Tooltip>
                                 <TooltipTrigger>

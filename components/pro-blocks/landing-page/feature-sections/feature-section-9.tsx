@@ -1,11 +1,14 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline"
+import { Button } from "@/components/ui/button"
+import { getUserCountry } from "@/geolocation"
 
 export function FeatureSection9() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [country, setCountry] = useState<"ar" | "mx" | "us">("ar")
 
   const handlePlay = () => {
     if (videoRef.current) {
@@ -20,18 +23,51 @@ export function FeatureSection9() {
     }
   }
 
+  useEffect(() => {
+    getUserCountry().then((c) => {
+      if (c === "ar" || c === "mx" || c === "us") setCountry(c)
+    })
+  }, [])
+
+  const whatsappNumbers: Record<string, string> = {
+    mx: "5215543219876",
+    ar: "5491150389694",
+    us: "1234567890",
+  }
+
+  const whatsappMessages: Record<string, string> = {
+    mx: "¡Hola! Quiero comenzar mi prueba gratuita desde México.",
+    ar: "¡Hola! Quiero comenzar mi prueba gratuita desde Argentina.",
+    us: "Hi! I want to start my free trial from the USA.",
+  }
+
+  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
+    whatsappMessages[country]
+  )}`
+
   return (
     <section className="bg-gray-100 py-30 md:py-38 border-b" id="how-it-works">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-20 items-center">
-
+          
           {/* Texto: arriba en mobile, a la derecha en desktop */}
           <div className="flex flex-col md:flex-none md:col-span-1 items-center md:items-start order-1 md:order-2">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center md:text-center text-black underline decoration-4 decoration-black underline-offset-8 mb-0 md:mb-0 leading-normal lg:leading-relaxed">
-  <span className="block mb-2">REPEAT</span>
-  <span className="block">EN ACCION.</span>
-</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center md:text-center text-black underline decoration-4 decoration-black underline-offset-8 mb-0 md:mb-0 leading-normal lg:leading-relaxed">
+              <span className="block mb-2">REPEAT</span>
+              <span className="block">EN ACCION.</span>
+            </h1>
 
+            {/* Botón para desktop */}
+            <div className="hidden md:flex md:mt-6 md:justify-center w-full">
+              <Button
+                asChild
+                className="text-white lg:px-10 lg:py-5 rounded-lg bg-black hover:bg-yellow-500 hover:text-black"
+              >
+                <a href={pruebaGratisLink} target="_blank" rel="noopener noreferrer">
+                  Comienza tu Prueba Gratis
+                </a>
+              </Button>
+            </div>
           </div>
 
           {/* Video */}
@@ -62,8 +98,20 @@ export function FeatureSection9() {
                 </button>
               )}
             </div>
+
+            {/* Botón debajo del video en mobile */}
+            <div className="mt-20 md:mt-0 md:hidden flex justify-center w-full">
+              <Button
+                asChild
+                className="text-white px-10 py-5 text-lg rounded-lg bg-black hover:bg-yellow-500 hover:text-black"
+              >
+                <a href={pruebaGratisLink} target="_blank" rel="noopener noreferrer">
+                  Comienza tu Prueba Gratis
+                </a>
+              </Button>
+            </div>
           </div>
-          
+
         </div>
       </div>
     </section>
