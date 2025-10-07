@@ -83,7 +83,7 @@ export function Cardsection() {
                 className="w-full max-w-sm bg-black text-white px-10 py-5 rounded-lg hover:bg-yellow-500 hover:text-black"
               >
                 <a href={pruebaGratisLink} target="_blank" rel="noopener noreferrer">
-                  Comienza tu Prueba Gratis
+                Quiero mi propio Club de Fidelidad
                 </a>
               </Button>
             </div>
@@ -95,7 +95,7 @@ export function Cardsection() {
                 className="w-full bg-black text-white px-16 py-5 rounded-lg hover:bg-yellow-500 hover:text-black"
               >
                 <a href={pruebaGratisLink} target="_blank" rel="noopener noreferrer">
-                  Comienza tu Prueba Gratis
+                  Quiero mi propio Club de Fidelidad
                 </a>
               </Button>
             </div>
