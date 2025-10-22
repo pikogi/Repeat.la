@@ -45,9 +45,9 @@ export function Cardsection() {
         </div>
 
         {/* Texto lado derecho */}
-        <div className="flex w-full md:w-1/2 flex-col justify-center text-center md:text-left gap-6">
+        <div className="flex w-full md:w-1/2 flex-col justify-center text-center gap-6">
           <h2 id="personaliza-tu-club" className="text-3xl md:text-5xl font-bold text-black leading-tight">
-            Personaliza tu Club <br /> con tu identidad:
+            Personaliza tu club <br /> con tu identidad:
           </h2>
 
           <p className="text-2xl md:text-4xl font-semibold text-black">
@@ -75,7 +75,7 @@ export function Cardsection() {
           </p>
 
           {/* Botón responsive */}
-          <div className="mt-6 flex flex-col gap-3 md:flex-row md:gap-0 md:justify-start">
+          <div className="mt-6 flex flex-col gap-3 md:flex-row md:gap-0 md:justify-center">
             {/* Mobile */}
             <div className="md:hidden w-full flex justify-center">
               <Button

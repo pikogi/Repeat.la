@@ -6,13 +6,13 @@ import { Tagline } from "@/components/pro-blocks/landing-page/tagline"
 
 const features = [
   {
-    title: "Tarjetas Digitales",
+    title: "",
     description: "Sin necesidad de tarjetas físicas. Todo en la billetera virtual del cliente.",
     icon: "/digital-loyalty-card-on-smartphone.jpg",
   },
   {
-    title: "Código QR",
-    description: "Los clientes escanean y se unen al instante.",
+    title: "Sin necesidad de tarjetas físicas. Todo en la billetera virtual del cliente",
+    description: "",
     icon: "/qr-code-scanner-in-store.jpg",
   },
   {
@@ -61,25 +61,25 @@ export function ModernFeatures() {
         <div className="md:w-1/2 flex flex-col gap-8">
           {features.map((feature, index) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="border rounded-lg shadow-lg p-4 flex items-start gap-6 md:gap-8 bg-white"
-            >
-              <Image
-                src={feature.icon}
-                alt={feature.title}
-                width={120}
-                height={120}
-                className="rounded-lg object-cover border shadow-md"
-              />
-              <div>
-                <h3 className="text-xl md:text-2xl font-semibold text-foreground">{feature.title}</h3>
-                <p className="text-md md:text-lg text-muted-foreground">{feature.description}</p>
-              </div>
-            </motion.div>
+            key={index}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            className="border rounded-lg shadow-lg p-4 flex items-center gap-6 md:gap-8 bg-white"
+          >
+            <Image
+              src={feature.icon}
+              alt={feature.title}
+              width={120}
+              height={120}
+              className="rounded-lg object-cover border shadow-md"
+            />
+            <div>
+              <h3 className="text-xl md:text-2xl font-semibold text-foreground">{feature.title}</h3>
+              <p className="text-md md:text-lg text-muted-foreground">{feature.description}</p>
+            </div>
+          </motion.div>          
           ))}
         </div>
       </div>

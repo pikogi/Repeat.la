@@ -13,9 +13,15 @@ export const metadata: Metadata = {
   title: "Repeat",
   description: "Repeat what your clients love!",
   icons: {
-    icon: "/repeatlogo.png",
+    icon: [
+      { url: "/repeat-logo-negro-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/repeat-logo-negro-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/repeat-logo-negro-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
 };
+
 
 export default function RootLayout({
   children,

@@ -50,9 +50,6 @@ export function HeroSection2() {
               FIDELIDAD EN <br />
               MINUTOS.
             </h1>
-            <p className="text-base text-xl lg:text-2xl text-white font-bold">
-              Comienza a fidelizar tus clientes hoy mismo!
-            </p>
           </div>
 
           <div className="flex flex-col gap-2 md:gap-3">

@@ -131,7 +131,7 @@ const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encod
                 ? plan.annualPricePerMonth[country]
                 : plan.monthlyPrice[country]
               const periodText = isAnnual
-                ? `/mes (facturado anualmente)`
+                ? `/mes`
                 : `/mes`
 
               const formattedPrice = new Intl.NumberFormat("es-AR", {

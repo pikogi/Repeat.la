@@ -17,7 +17,7 @@ export function FaqSection2() {
   const whatsappMessages: Record<string, string> = {
     mx: "¡Hola! Quiero agendar una demo desde México.",
     ar: "¡Hola! Quiero agendar una demo desde Argentina.",
-    us: "Hi! I want to schedule a demo from the USA.",
+    us: "Hi! I want to schedule a demo from USA.",
   };
 
   const contactoLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
@@ -26,7 +26,7 @@ export function FaqSection2() {
 
   return (
     <section className="bg-gray-100 section-padding-y border-b text-black" aria-labelledby="faq-heading" id="faq">
-      <div className="container-padding-x container mx-auto">
+      <div className="container-padding-x container mx-auto md:text-lg">
         <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
           {/* Left Column */}
           <div className="section-title-gap-lg flex flex-1 flex-col">
@@ -107,17 +107,14 @@ export function FaqSection2() {
                     ¿Cómo funciona la prueba gratuita?
                   </AccordionTrigger>
                   <AccordionContent className="text-black">
-                    Puedes comenzar con una prueba gratuita sin necesidad de tarjeta de crédito. Durante este período
-                    tendrás acceso completo a todas las funcionalidades de Repeat para que puedas probar el sistema con
-                    tus clientes reales.
+                  Ofrecemos 7 días de prueba gratuita. Durante este período tendrás acceso completo a todas las funcionalidades de Repeat para que puedas probar el sistema con tus clientes reales.
                   </AccordionContent>
                 </AccordionItem>
 
                 <AccordionItem value="billing-2">
                   <AccordionTrigger className="text-left text-black">¿Cuánto tiempo toma implementarlo?</AccordionTrigger>
                   <AccordionContent className="text-black">
-                    La configuración toma aproximadamente 5 minutos. Solo necesitas personalizar tu tarjeta con tu
-                    marca, imprimir el código QR y colocarlo en tu local. Nuestro equipo te guía en todo el proceso.
+                  Nuestro equipo se encarga de crear tu cuenta para tu prueba gratuita de 7 dias. Vamos a solicitar algunos datos para crear tu cuenta y en 24 horas estará lista! Te enviaremos los accesos junto con un QR para imprimir y poner en tu local para comenzar a conseguir miembros en tu club.
                   </AccordionContent>
                 </AccordionItem>
 
