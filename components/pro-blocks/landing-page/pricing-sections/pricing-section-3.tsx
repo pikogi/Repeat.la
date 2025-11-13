@@ -25,11 +25,11 @@ const pricingData = {
         { name: "Escaneo QR", tooltip: "Sistema de escaneo rápido y fácil" },
         { name: "Reportes básicos", tooltip: "Estadísticas de uso y clientes" },
       ],
-      monthlyPrice: { ar: 4000, mx: 499, us: 19 },
-      annualPricePerMonth: { ar: 3333, mx: 420, us: 16 },
+      monthlyPrice: { ar: 20000, mx: 400, us: 20 },
+      annualPricePerMonth: { ar: 16.666, mx: 333.33, us: 16.65, },
     },
     {
-      name: "Pro",
+      name: "Full",
       description:
         "Para negocios en crecimiento que quieren aprovechar al máximo su base de clientes.",
       features: [
@@ -39,8 +39,8 @@ const pricingData = {
         { name: "Múltiples sucursales", tooltip: "Gestiona varias ubicaciones desde un panel" },
         { name: "Soporte prioritario", tooltip: "Asistencia rápida vía WhatsApp" },
       ],
-      monthlyPrice: { ar: 6500, mx: 899, us: 25 },
-      annualPricePerMonth: { ar: 5416, mx: 749, us: 20 },
+      monthlyPrice: { ar: 35.000, mx: 700, us: 35 },
+      annualPricePerMonth: { ar: 29.166, mx: 583.33, us: 29.16, },
       highlighted: true,
     },
   ],
@@ -94,10 +94,9 @@ export function PricingSection3() {
         <div className="flex flex-col items-center gap-10 md:gap-12">
           {/* Header */}
           <div className="section-title-gap-lg flex max-w-xl flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 text-red-600 text-sm font-medium border border-red-100">
-              <Sparkles className="w-4 h-4" />
-              Precios
-            </span>
+          <Tagline className="text-red-500 text-lg md:text-xl">
+          Precios
+        </Tagline>
             <h2 id="pricing-section-title-3" className="heading-lg text-gray-900">
               Planes diseñados para tu negocio
             </h2>
@@ -125,7 +124,7 @@ export function PricingSection3() {
             >
               Anual
               <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">
-                Ahorra 17%
+                2 Meses Gratis!
               </span>
             </button>
           </div>
@@ -157,8 +156,8 @@ export function PricingSection3() {
                   key={plan.name}
                   className={`relative overflow-hidden transition-all hover:shadow-xl ${
                     plan.highlighted
-                      ? "border-2 border-gray-900 shadow-lg md:scale-105"
-                      : "border border-gray-200 shadow-md bg-gray-50"
+                      ? "border-3 border-gray-900 shadow-lg md:scale-105  bg-gray-50"
+                      : "border border-gray-900 shadow-md"
                   }`}
                 >
                   {/* Badge "Más popular" */}
@@ -219,8 +218,8 @@ export function PricingSection3() {
                       <Button
                         className={`w-full font-semibold py-6 transition-all ${
                           plan.highlighted
-                            ? "bg-gray-900 text-white hover:bg-gray-800 shadow-md hover:shadow-lg"
-                            : "bg-white text-gray-900 border-2 border-gray-900 hover:bg-gray-900 hover:text-white"
+                            ? "bg-black text-white border-2 border-gray-900 hover:bg-yellow-500 hover:text-gray-900 shadow-md hover:shadow-xl"
+                            : "bg-white text-gray-900 border-2 border-gray-900 hover:bg-yellow-500 hover:text-gray-900 hover:shadow-lg"
                         }`}
                         asChild
                       >
@@ -246,7 +245,7 @@ export function PricingSection3() {
                           <div key={i} className="flex items-start gap-3">
                             <div
                               className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${
-                                plan.highlighted ? "bg-gray-900" : "bg-gray-300"
+                                plan.highlighted ? "bg-gray-900" : "bg-gray-900"
                               }`}
                             >
                               <Check className="h-3 w-3 text-white" />

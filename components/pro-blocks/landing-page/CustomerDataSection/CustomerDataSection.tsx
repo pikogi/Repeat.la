@@ -68,7 +68,7 @@ export function CustomerDataSection() {
             <div className="hidden md:flex w-full max-w-md">
               <Button
                 asChild
-                className="text-white px-6 py-3 md:px-8 md:py-4 rounded-lg bg-black hover:bg-yellow-500 hover:text-black"
+                className="text-white px-6 py-3 md:text-xl md:px-12 md:py-6 rounded-lg bg-black hover:bg-yellow-500 hover:text-black"
               >
                 <a href={pruebaGratisLink} target="_blank" rel="noopener noreferrer">
                   Quiero mi propio Club de Fidelidad
@@ -79,7 +79,7 @@ export function CustomerDataSection() {
         </div>
 
         {/* Columna Derecha - Imagen */}
-        <div className="md:w-3/5 flex self-center">
+        <div className="md:w-3/5 flex self-center mx-auto">
           <Image
             src="/repeat2.jpg"
             alt="Panel de Control"

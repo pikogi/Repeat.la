@@ -47,7 +47,7 @@ export function FeatureSection9() {
 
   return (
     <section className="bg-gray-100 section-padding-y border-b" id="how-it-works">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="md:container container-padding-x mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-20 items-center">
           
           {/* Texto: arriba en mobile, a la derecha en desktop */}
@@ -61,7 +61,7 @@ export function FeatureSection9() {
             <div className="hidden md:flex md:mt-6 md:justify-center w-full">
               <Button
                 asChild
-                className="text-white px-6 py-3 md:px-8 md:py-4 rounded-lg bg-black hover:bg-yellow-500 hover:text-black"
+                className="text-white px-6 py-3 md:px-12 md:py-6 md:text-xl rounded-lg bg-black hover:bg-yellow-500 hover:text-black"
               >
                 <a href={pruebaGratisLink} target="_blank" rel="noopener noreferrer">
                   Comienza tu Prueba Gratis

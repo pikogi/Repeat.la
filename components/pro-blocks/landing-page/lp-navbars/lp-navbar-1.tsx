@@ -30,6 +30,7 @@ const NavMenuItems = ({ className, isMobile = false }: { className?: string; isM
     <div className={`flex flex-col gap-1 md:flex-row ${className ?? ""}`}>
       {MENU_ITEMS.map((item) => {
         const { label } = item;
+        if (isMobile && label === "Iniciar Sesión") return null;
         const href = "href" in item ? item.href : undefined;
         const submenu = "submenu" in item ? item.submenu : undefined;
         const isOpen = openSubmenu === label;
@@ -113,7 +114,7 @@ const NavMenuItems = ({ className, isMobile = false }: { className?: string; isM
                   isExternal(item.href) ? (
                     <Link key={item.label} href={item.href} passHref legacyBehavior>
                       <a target="_blank" rel="noopener noreferrer" className="w-full">
-                        <Button variant="ghost" className="justify-start text-yellow-500 w-full">
+                        <Button variant="ghost" className="justify-center text-yellow-500 w-full">
                           {item.label}
                         </Button>
                       </a>
@@ -166,7 +167,7 @@ export function LpNavbar1() {
     <nav className="fixed top-3 left-0 right-0 z-50 flex justify-center transition-all duration-500">
       {/* Contenedor principal */}
       <div
-        className={`flex items-center justify-between gap-2 sm:gap-4 w-[92%] max-w-7xl px-4 py-[12px] md:px-6 transition-all duration-500  ${
+        className={`flex items-center justify-between gap-2 sm:gap-4 w-[92%] max-w-7xl px-4 py-[12px] md:py-5 md:px-6 transition-all duration-500  ${
           scrolled
             ? "bg-black border-neutral-800 shadow-lg rounded-xl lg:rounded-full"
             : "bg-transparent rounded-xl lg:rounded-full"
@@ -230,11 +231,11 @@ export function LpNavbar1() {
             <div className="m-4 mx-auto mt-6 max-w-fit sm:hidden">
               <Button
                 asChild
-                className="rounded-full border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black px-[22px] py-[14px] text-sm font-medium"
+                className="rounded-full border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black px-[22px] py-[14px] text-sm font-medium font-bold"
               >
-                <a href={pruebaGratisLink} target="_blank" rel="noopener noreferrer">
-                  Prueba Gratis
-                </a>
+                <a href="https://app.repeat.la/auth/login" target="_blank" rel="noopener noreferrer">
+                Iniciar Sesión
+               </a>
               </Button>
             </div>
           </nav>

@@ -83,7 +83,7 @@ export function Cardsection() {
                 className="text-white px-10 py-5 text-lg rounded-lg bg-black hover:bg-yellow-500 hover:text-black"
               >
                 <a href={pruebaGratisLink} target="_blank" rel="noopener noreferrer">
-                Quiero mi propio Club de Fidelidad
+                Comienza tu Prueba Gratis
                 </a>
               </Button>
             </div>
@@ -92,7 +92,7 @@ export function Cardsection() {
             <div className="hidden md:flex w-full max-w-md">
               <Button
                 asChild
-                className="w-full bg-black text-white px-16 py-5 rounded-lg hover:bg-yellow-500 hover:text-black"
+                className="w-full bg-black text-white md:text-xl md:px-12 md:py-6 px-16 py-5 rounded-lg hover:bg-yellow-500 hover:text-black"
               >
                 <a href={pruebaGratisLink} target="_blank" rel="noopener noreferrer">
                   Quiero mi propio Club de Fidelidad
