@@ -13,17 +13,17 @@ const features = [
   {
     title: "",
     description: "Los clientes escanean el QR y completan con sus datos de contacto.",
-    icon: "/qr-code-scanner-in-store.jpg",
+    icon: "/image2.jpg",
   },
   {
     title: "",
     description: "Descargan la tarjeta de fidelidad en su billetera virtual.",
-    icon: "/customer-database-dashboard.jpg",
+    icon: "/image3.jpg",
   },
   {
     title: "",
     description: "Presentan su tarjeta virtual cada vez que visitan el local hasta ganar su premio.",
-    icon: "/analytics-dashboard-with-statistics.jpg",
+    icon: "/image4.jpg",
   },
   {
     title: "",

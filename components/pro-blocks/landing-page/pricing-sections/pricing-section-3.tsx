@@ -26,7 +26,7 @@ const pricingData = {
         { name: "Reportes básicos", tooltip: "Estadísticas de uso y clientes" },
       ],
       monthlyPrice: { ar: 20000, mx: 400, us: 20 },
-      annualPricePerMonth: { ar: 16.666, mx: 333.33, us: 16.65, },
+      annualPricePerMonth: { ar: 16666, mx: 333.33, us: 16.65, },
     },
     {
       name: "Full",
@@ -39,8 +39,8 @@ const pricingData = {
         { name: "Múltiples sucursales", tooltip: "Gestiona varias ubicaciones desde un panel" },
         { name: "Soporte prioritario", tooltip: "Asistencia rápida vía WhatsApp" },
       ],
-      monthlyPrice: { ar: 35.000, mx: 700, us: 35 },
-      annualPricePerMonth: { ar: 29.166, mx: 583.33, us: 29.16, },
+      monthlyPrice: { ar: 35000, mx: 700, us: 35 },
+      annualPricePerMonth: { ar: 29166, mx: 583.33, us: 29.16, },
       highlighted: true,
     },
   ],
@@ -150,6 +150,25 @@ export function PricingSection3() {
               const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
                 whatsappMessages[country]
               )}`
+              const handleCheckout = async (planName: string) => {
+                const priceIds: Record<string, string> = {
+                  "Básico": "price_1ST1rTIOgPd8DWab9gW8ZhtU", // cambia por tu ID real
+                  "Full": "price_0987654321fedcba",   // cambia por tu ID real
+                }
+              
+                const priceId = priceIds[planName]
+                if (!priceId) return alert("No se encontró el plan en Stripe")
+              
+                const res = await fetch("/api/checkout", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ priceId }),
+                })
+              
+                const data = await res.json()
+                if (data.url) window.location.href = data.url
+                else alert("Error al iniciar el checkout")
+              }              
 
               return (
                 <Card
@@ -216,21 +235,16 @@ export function PricingSection3() {
 
                       {/* CTA */}
                       <Button
-                        className={`w-full font-semibold py-6 transition-all ${
-                          plan.highlighted
-                            ? "bg-black text-white border-2 border-gray-900 hover:bg-yellow-500 hover:text-gray-900 shadow-md hover:shadow-xl"
-                            : "bg-white text-gray-900 border-2 border-gray-900 hover:bg-yellow-500 hover:text-gray-900 hover:shadow-lg"
-                        }`}
-                        asChild
-                      >
-                        <a
-                          href={pruebaGratisLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Comenzar ahora →
-                        </a>
-                      </Button>
+  className={`w-full font-semibold py-6 transition-all ${
+    plan.highlighted
+      ? "bg-black text-white border-2 border-gray-900 hover:bg-yellow-500 hover:text-gray-900 shadow-md hover:shadow-xl"
+      : "bg-white text-gray-900 border-2 border-gray-900 hover:bg-yellow-500 hover:text-gray-900 hover:shadow-lg"
+  }`}
+  onClick={() => handleCheckout(plan.name)}
+>
+  Comenzar ahora →
+</Button>
+
                     </div>
 
                     {/* Features */}
