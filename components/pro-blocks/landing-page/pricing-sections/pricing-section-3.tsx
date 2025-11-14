@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Check, Info, Sparkles } from "lucide-react"
+import { Check, Info } from "lucide-react"
 import {
   Tooltip,
   TooltipContent,
@@ -16,18 +16,23 @@ import { getUserCountry } from "@/geolocation"
 const pricingData = {
   plans: [
     {
-      name: "Básico",
+      name: "Club de Lealtad",
       description:
-        "Perfecto para negocios pequeños que están comenzando con programas de fidelidad.",
+        "Un plan optimizado para todo tipo de negocios, desde pequeños emprendedores hasta marcas consolidadas",
       features: [
-        { name: "Hasta 100 clientes", tooltip: "Base de datos de hasta 100 clientes activos" },
-        { name: "Tarjetas digitales ilimitadas", tooltip: "Tus clientes pueden tener su tarjeta en el celular" },
-        { name: "Escaneo QR", tooltip: "Sistema de escaneo rápido y fácil" },
-        { name: "Reportes básicos", tooltip: "Estadísticas de uso y clientes" },
+        { name: "Clientes ilimitados", tooltip: "Sin límite en la cantidad de miembros que puede tener tu club." },
+        { name: "Hasta 5 condiciones de club", tooltip: "Crea y gestiona hasta cinco tipos de membresías o reglas activas al mismo tiempo." },
+        { name: "Miembros de equipo ilimitados", tooltip: "Agrega a todo tu staff sin restricciones." },
+        { name: "Herramienta de Email Marketing integrada", tooltip: "Envía campañas, recordatorios y comunicaciones con un solo clic." },
+        { name: "Base de datos completa de clientes", tooltip: "Acceso a toda la información clave de tus miembros." },
+        { name: "Sin necesidad de app", tooltip: "Funciona directamente en Google Wallet y Apple Wallet." },
+
       ],
       monthlyPrice: { ar: 20000, mx: 400, us: 20 },
-      annualPricePerMonth: { ar: 16666, mx: 333.33, us: 16.65, },
+      annualPricePerMonth: { ar: 16666, mx: 333.33, us: 16.65 },
     },
+
+    /*
     {
       name: "Full",
       description:
@@ -40,9 +45,10 @@ const pricingData = {
         { name: "Soporte prioritario", tooltip: "Asistencia rápida vía WhatsApp" },
       ],
       monthlyPrice: { ar: 35000, mx: 700, us: 35 },
-      annualPricePerMonth: { ar: 29166, mx: 583.33, us: 29.16, },
+      annualPricePerMonth: { ar: 29166, mx: 583.33, us: 29.16 },
       highlighted: true,
     },
+    */
   ],
 }
 
@@ -69,15 +75,14 @@ export function PricingSection3() {
   }
 
   const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero comenzar mi prueba gratuita desde México.",
-    ar: "¡Hola! Quiero comenzar mi prueba gratuita desde Argentina.",
-    us: "Hi! I want to start my free trial from the USA.",
+    mx: "¡Hola! Quisiera comenzar mi prueba gratuita.",
+    ar: "¡Hola! Quisiera comenzar mi prueba gratuita.",
+    us: "Hi! I would like to start my free trial.",
   }
 
   const currencySymbol: Record<string, string> = { mx: "$", ar: "$", us: "$" }
   const currencySuffix: Record<string, string> = { mx: "MXN", ar: "ARS", us: "USD" }
 
-  // Calcular ahorro porcentual
   const calculateSavings = (plan: typeof pricingData.plans[0]) => {
     const monthlyTotal = plan.monthlyPrice[country] * 12
     const annualTotal = plan.annualPricePerMonth[country] * 12
@@ -92,13 +97,14 @@ export function PricingSection3() {
     >
       <div className="container-padding-x container mx-auto">
         <div className="flex flex-col items-center gap-10 md:gap-12">
+          
           {/* Header */}
           <div className="section-title-gap-lg flex max-w-xl flex-col items-center text-center">
-          <Tagline className="text-red-500 text-lg md:text-xl">
-          Precios
-        </Tagline>
+            <Tagline className="text-red-500 text-lg md:text-xl">
+              Precios
+            </Tagline>
             <h2 id="pricing-section-title-3" className="heading-lg text-gray-900">
-              Planes diseñados para tu negocio
+             Un plan diseñado para todos los negocios
             </h2>
           </div>
 
@@ -130,69 +136,35 @@ export function PricingSection3() {
           </div>
 
           {/* Pricing Cards */}
-          <div className="grid w-full max-w-5xl grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {pricingData.plans.map((plan, index) => {
+          <div className="grid w-full max-w-5xl grid-cols-1 place-items-center gap-6 md:gap-8">
+          {pricingData.plans.map((plan) => {
               const isAnnual = billingCycle === "anual"
               const displayedPrice = isAnnual
                 ? plan.annualPricePerMonth[country]
                 : plan.monthlyPrice[country]
-              const monthlyPrice = plan.monthlyPrice[country]
+
               const savings = calculateSavings(plan)
 
-              const formattedPrice = new Intl.NumberFormat("es-AR", {
-                minimumFractionDigits: 0,
-              }).format(displayedPrice)
+              const formattedPrice = new Intl.NumberFormat("es-AR").format(displayedPrice)
+              const formattedMonthlyPrice = new Intl.NumberFormat("es-AR").format(
+                plan.monthlyPrice[country]
+              )
 
-              const formattedMonthlyPrice = new Intl.NumberFormat("es-AR", {
-                minimumFractionDigits: 0,
-              }).format(monthlyPrice)
-
-              const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
+              const whatsappLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
                 whatsappMessages[country]
               )}`
-              const handleCheckout = async (planName: string) => {
-                const priceIds: Record<string, string> = {
-                  "Básico": "price_1ST1rTIOgPd8DWab9gW8ZhtU", // cambia por tu ID real
-                  "Full": "price_0987654321fedcba",   // cambia por tu ID real
-                }
-              
-                const priceId = priceIds[planName]
-                if (!priceId) return alert("No se encontró el plan en Stripe")
-              
-                const res = await fetch("/api/checkout", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({ priceId }),
-                })
-              
-                const data = await res.json()
-                if (data.url) window.location.href = data.url
-                else alert("Error al iniciar el checkout")
-              }              
 
               return (
                 <Card
                   key={plan.name}
-                  className={`relative overflow-hidden transition-all hover:shadow-xl ${
-                    plan.highlighted
-                      ? "border-3 border-gray-900 shadow-lg md:scale-105  bg-gray-50"
-                      : "border border-gray-900 shadow-md"
-                  }`}
+                  className="relative overflow-hidden transition-all border border-gray-900 shadow-md"
                 >
-                  {/* Badge "Más popular" */}
-                  {plan.highlighted && (
-                    <div className="absolute top-0 right-0 bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 px-4 py-1 text-xs font-bold uppercase tracking-wide rounded-bl-lg">
-                      Más popular
-                    </div>
-                  )}
-
                   <CardContent className="flex flex-col gap-8 p-8">
+                    
                     {/* Header */}
                     <div className="flex flex-col gap-4 pt-4">
                       <div className="flex flex-col gap-2">
-                        <h3 className="text-2xl font-bold text-gray-900">
-                          {plan.name}
-                        </h3>
+                        <h3 className="text-2xl font-bold text-gray-900">{plan.name}</h3>
                         <p className="text-sm text-gray-600 leading-relaxed">
                           {plan.description}
                         </p>
@@ -204,12 +176,9 @@ export function PricingSection3() {
                           <span className="text-5xl font-bold text-gray-900">
                             {currencySymbol[country]}{formattedPrice}
                           </span>
-                          <span className="text-lg text-gray-600 mb-2">
-                            /mes
-                          </span>
+                          <span className="text-lg text-gray-600 mb-2">/mes</span>
                         </div>
 
-                        {/* Precio tachado cuando es anual */}
                         {isAnnual && (
                           <div className="flex items-center gap-2 mt-1">
                             <span className="text-sm text-gray-500 line-through">
@@ -227,41 +196,43 @@ export function PricingSection3() {
 
                         {isAnnual && (
                           <p className="text-xs text-gray-600 mt-2 bg-gray-100 px-3 py-2 rounded-md">
-                            💰 Pago anual: {currencySymbol[country]}
-                            {new Intl.NumberFormat("es-AR", { minimumFractionDigits: 0 }).format(displayedPrice * 12)} {currencySuffix[country]}
+                            💰 Pago anual:{" "}
+                            {currencySymbol[country]}
+                            {new Intl.NumberFormat("es-AR").format(displayedPrice * 12)}{" "}
+                            {currencySuffix[country]}
                           </p>
                         )}
                       </div>
 
-                      {/* CTA */}
+                      {/* CTA — WhatsApp (Stripe comentado) */}
+                      {/*
                       <Button
-  className={`w-full font-semibold py-6 transition-all ${
-    plan.highlighted
-      ? "bg-black text-white border-2 border-gray-900 hover:bg-yellow-500 hover:text-gray-900 shadow-md hover:shadow-xl"
-      : "bg-white text-gray-900 border-2 border-gray-900 hover:bg-yellow-500 hover:text-gray-900 hover:shadow-lg"
-  }`}
-  onClick={() => handleCheckout(plan.name)}
->
-  Comenzar ahora →
-</Button>
+                        className="w-full font-semibold py-6 transition-all bg-white text-gray-900 border-2 border-gray-900 hover:bg-yellow-500 hover:text-gray-900 hover:shadow-lg"
+                        onClick={() => handleCheckout(plan.name)}
+                      >
+                        Comenzar ahora →
+                      </Button>
+                      */}
 
+                      <Button
+                        asChild
+                        className="w-full font-semibold py-6 transition-all bg-yellow-500 text-gray-900 border-2 border-gray-900 hover:bg-gray-900 hover:text-white hover:shadow-lg"
+                      >
+                        <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                          Comenzar ahora →
+                        </a>
+                      </Button>
                     </div>
 
                     {/* Features */}
                     <div className="flex flex-col gap-4">
                       <p className="text-sm font-semibold text-gray-900 uppercase tracking-wide">
-                        {index === 0
-                          ? "Incluye:"
-                          : `Todo lo de ${pricingData.plans[index - 1].name}, más:`}
+                        Incluye:
                       </p>
                       <div className="flex flex-col gap-3">
                         {plan.features.map((feature, i) => (
                           <div key={i} className="flex items-start gap-3">
-                            <div
-                              className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 ${
-                                plan.highlighted ? "bg-gray-900" : "bg-gray-900"
-                              }`}
-                            >
+                            <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 bg-gray-900">
                               <Check className="h-3 w-3 text-white" />
                             </div>
                             <span className="flex-1 text-sm text-gray-700">

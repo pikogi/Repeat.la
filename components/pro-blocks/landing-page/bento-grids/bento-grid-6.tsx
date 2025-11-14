@@ -18,7 +18,7 @@ const features = [
   {
     title: "",
     description: "Descargan la tarjeta de fidelidad en su billetera virtual.",
-    icon: "/image3.jpg",
+    icon: "/image8.jpg",
   },
   {
     title: "",
@@ -28,7 +28,7 @@ const features = [
   {
     title: "",
     description: "Otro cliente contento y fidelizado.",
-    icon: "/analytics-dashboard-with-statistics.jpg",
+    icon: "/image5.jpg",
   },
 ]
 
@@ -39,7 +39,7 @@ export function ModernFeatures() {
       <div className="section-title-gap-lg flex flex-col items-center text-center mb-16">
         <Tagline className="text-red-500 text-lg md:text-xl">¿Cómo Funciona?</Tagline>
         <h2 className="text-black font-bold text-4xl md:text-5xl mt-7">
-          ¡Junta 5 sellos y gana un peinado GRATIS!
+          ¡Junta 6 sellos y gana un corte GRATIS!
         </h2>
       </div>
 
@@ -48,7 +48,7 @@ export function ModernFeatures() {
         <div className="md:w-[45%] relative">
           <div className="sticky top-24">
             <Image
-              src="/repeat1.jpg"
+              src="/image8.jpg"
               alt="Tarjeta Digital"
               width={550}
               height={550}
