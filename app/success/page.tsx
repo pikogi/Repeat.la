@@ -38,7 +38,6 @@ function SuccessContent() {
       return;
     }
 
-    // Fetch real data from Stripe
     fetch(`/api/checkout-session?session_id=${sessionId}`)
       .then((res) => res.json())
       .then((data) => {
@@ -158,7 +157,6 @@ function SuccessContent() {
     window.URL.revokeObjectURL(url);
   };
 
-  // Loading state
   if (loading) {
     return (
       <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
@@ -174,7 +172,6 @@ function SuccessContent() {
     );
   }
 
-  // Error state
   if (error || !sessionData) {
     return (
       <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-red-50 to-orange-50 px-6">
@@ -188,7 +185,7 @@ function SuccessContent() {
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Error</h1>
           <p className="text-gray-600 mb-6">{error || "No se pudo cargar la información"}</p>
-          <a
+          
             href="/"
             className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-all"
           >
@@ -215,7 +212,6 @@ function SuccessContent() {
 
   return (
     <main className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 overflow-hidden px-6">
-      {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-20 left-10 w-72 h-72 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-30"
@@ -245,14 +241,12 @@ function SuccessContent() {
         />
       </div>
 
-      {/* Main content card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 40 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="relative bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 max-w-2xl w-full border border-white/20"
       >
-        {/* Success icon with animation */}
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
@@ -280,7 +274,6 @@ function SuccessContent() {
           </div>
         </motion.div>
 
-        {/* Success message */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -296,7 +289,6 @@ function SuccessContent() {
           </p>
         </motion.div>
 
-        {/* Order details */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -345,7 +337,6 @@ function SuccessContent() {
           </div>
         </motion.div>
 
-        {/* Action buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -373,7 +364,6 @@ function SuccessContent() {
           </motion.button>
         </motion.div>
 
-        {/* Additional info */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -384,7 +374,7 @@ function SuccessContent() {
             <Mail className="w-4 h-4" />
             <p>
               ¿Necesitas ayuda?{" "}
-              <a
+              
                 href="mailto:soporte@tuempresa.com"
                 className="text-green-600 font-medium hover:text-green-700 underline"
               >
@@ -394,33 +384,6 @@ function SuccessContent() {
           </div>
         </motion.div>
       </motion.div>
-
-      {/* Floating confetti elements */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-3 h-3 bg-green-400 rounded-full"
-          initial={{
-            x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1000),
-            y: -20,
-            opacity: 1,
-          }}
-          animate={{
-            y: typeof window !== 'undefined' ? window.innerHeight + 20 : 1000,
-            opacity: 0,
-            rotate: 360,
-          }}
-          transition={{
-            duration: 3 + Math.random() * 2,
-            delay: Math.random() * 2,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          style={{
-            left: `${Math.random() * 100}%`,
-          }}
-        />
-      ))}
     </main>
   );
 }
@@ -429,14 +392,8 @@ export default function SuccessPage() {
   return (
     <Suspense fallback={
       <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center"
-        >
-          <Loader2 className="w-16 h-16 text-green-600 animate-spin mx-auto mb-4" />
-          <p className="text-lg text-gray-600">Cargando...</p>
-        </motion.div>
+        <Loader2 className="w-16 h-16 text-green-600 animate-spin mx-auto mb-4" />
+        <p className="text-lg text-gray-600">Cargando...</p>
       </main>
     }>
       <SuccessContent />
