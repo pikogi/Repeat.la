@@ -71,13 +71,11 @@ export function PricingSection3() {
   const whatsappNumbers: Record<string, string> = {
     mx: "5215543219876",
     ar: "5491150389694",
-    us: "1234567890",
   }
 
   const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quisiera comenzar mi prueba gratuita.",
-    ar: "¡Hola! Quisiera comenzar mi prueba gratuita.",
-    us: "Hi! I would like to start my free trial.",
+    mx: "¡Hola! Quisiera comenzar ahora con mi prueba gratuita.",
+    ar: "¡Hola! Quisiera comenzar ahora con mi prueba gratuita.",
   }
 
   const currencySymbol: Record<string, string> = { mx: "$", ar: "$", us: "$" }

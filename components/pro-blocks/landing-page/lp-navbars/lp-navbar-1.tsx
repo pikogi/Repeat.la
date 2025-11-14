@@ -147,8 +147,8 @@ export function LpNavbar1() {
   };
 
   const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero comenzar mi prueba gratuita desde México.",
-    ar: "¡Hola! Quiero comenzar mi prueba gratuita desde Argentina.",
+    mx: "¡Hola! Quiero comenzar mi prueba gratuita.",
+    ar: "¡Hola! Quiero comenzar mi prueba gratuita.",
   };
 
   const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(

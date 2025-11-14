@@ -10,13 +10,11 @@ export function Cardsection() {
   const whatsappNumbers: Record<string, string> = {
     mx: "5215543219876",
     ar: "5491150389694",
-    us: "1234567890",
   };
 
   const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero comenzar mi prueba gratuita desde México.",
-    ar: "¡Hola! Quiero comenzar mi prueba gratuita desde Argentina.",
-    us: "Hi! I want to start my free trial from the USA.",
+    mx: "¡Hola! Quiero comenzar mi propio Club de Fidelidad.",
+    ar: "¡Hola! Quiero comenzar mi propio Club de Fidelidad.",
   };
 
   const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(

@@ -11,13 +11,11 @@ export function FaqSection2() {
   const whatsappNumbers: Record<string, string> = {
     mx: "5215543219876",
     ar: "5491150389694",
-    us: "1234567890",
   };
 
   const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero agendar una demo desde México.",
-    ar: "¡Hola! Quiero agendar una demo desde Argentina.",
-    us: "Hi! I want to schedule a demo from USA.",
+    mx: "¡Hola! Quiero agendar una demo.",
+    ar: "¡Hola! Quiero agendar una demo.",
   };
 
   const contactoLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
