@@ -35,7 +35,7 @@ export function Cardsection() {
         <div className="relative w-full md:w-[70%] flex justify-center md:justify-start">
           <div className="relative w-[90%] md:w-[120%] h-[350px] md:h-[750px]">
             <Image
-              src="/repeat6.png"
+              src="/repeat7.png"
               alt="Vista previa de tarjetas personalizadas"
               fill
               className="rounded-2xl object-cover"
