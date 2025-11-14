@@ -26,47 +26,45 @@ const pricingData = {
         { name: "Herramienta de Email Marketing integrada", tooltip: "Envía campañas, recordatorios y comunicaciones con un solo clic." },
         { name: "Base de datos completa de clientes", tooltip: "Acceso a toda la información clave de tus miembros." },
         { name: "Sin necesidad de app", tooltip: "Funciona directamente en Google Wallet y Apple Wallet." },
-
       ],
       monthlyPrice: { ar: 20000, mx: 400, us: 20 },
       annualPricePerMonth: { ar: 16666, mx: 333.33, us: 16.65 },
     },
-
-    /*
-    {
-      name: "Full",
-      description:
-        "Para negocios en crecimiento que quieren aprovechar al máximo su base de clientes.",
-      features: [
-        { name: "Clientes ilimitados", tooltip: "Sin límite de clientes en tu base de datos" },
-        { name: "Campañas personalizadas", tooltip: "Envía promociones segmentadas por WhatsApp" },
-        { name: "Analytics avanzados", tooltip: "Reportes detallados de comportamiento" },
-        { name: "Múltiples sucursales", tooltip: "Gestiona varias ubicaciones desde un panel" },
-        { name: "Soporte prioritario", tooltip: "Asistencia rápida vía WhatsApp" },
-      ],
-      monthlyPrice: { ar: 35000, mx: 700, us: 35 },
-      annualPricePerMonth: { ar: 29166, mx: 583.33, us: 29.16 },
-      highlighted: true,
-    },
-    */
   ],
 }
 
 export function PricingSection3() {
   const [billingCycle, setBillingCycle] = useState<"mensual" | "anual">("mensual")
-  const [country, setCountry] = useState<"ar" | "mx" | "us">("ar")
+  const [country, setCountry] = useState<"ar" | "mx" | "us">("us")
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const paramCountry = urlParams.get("country")?.toLowerCase()
+
     if (paramCountry === "ar" || paramCountry === "mx" || paramCountry === "us") {
       setCountry(paramCountry)
     } else {
       getUserCountry().then((c) => {
         if (c === "ar" || c === "mx" || c === "us") setCountry(c)
+        else setCountry("us") // fallback
       })
     }
   }, [])
+
+  // Países permitidos con número propio
+  const allowedCountries = ["ar", "mx"] as const
+
+  // Si no es AR ni MX → WhatsApp usa Argentina
+  const whatsappCountry =
+    allowedCountries.includes(country as (typeof allowedCountries)[number])
+      ? country
+      : "mx"
+
+  // Currency:
+  // ar → ARS
+  // mx → MXN
+  // otros → USD
+  const currency = country === "ar" || country === "mx" ? country : "us"
 
   const whatsappNumbers: Record<string, string> = {
     mx: "5215543219876",
@@ -82,8 +80,8 @@ export function PricingSection3() {
   const currencySuffix: Record<string, string> = { mx: "MXN", ar: "ARS", us: "USD" }
 
   const calculateSavings = (plan: typeof pricingData.plans[0]) => {
-    const monthlyTotal = plan.monthlyPrice[country] * 12
-    const annualTotal = plan.annualPricePerMonth[country] * 12
+    const monthlyTotal = plan.monthlyPrice[currency] * 12
+    const annualTotal = plan.annualPricePerMonth[currency] * 12
     return Math.round(((monthlyTotal - annualTotal) / monthlyTotal) * 100)
   }
 
@@ -95,14 +93,14 @@ export function PricingSection3() {
     >
       <div className="container-padding-x container mx-auto">
         <div className="flex flex-col items-center gap-10 md:gap-12">
-          
+
           {/* Header */}
           <div className="section-title-gap-lg flex max-w-xl flex-col items-center text-center">
             <Tagline className="text-red-500 text-lg md:text-xl">
               Precios
             </Tagline>
             <h2 id="pricing-section-title-3" className="heading-lg text-gray-900">
-             Un plan diseñado para todos los negocios
+              Un plan diseñado para todos los negocios
             </h2>
           </div>
 
@@ -118,6 +116,7 @@ export function PricingSection3() {
             >
               Mensual
             </button>
+
             <button
               onClick={() => setBillingCycle("anual")}
               className={`px-6 py-2 rounded-full font-medium transition-all relative ${
@@ -135,21 +134,21 @@ export function PricingSection3() {
 
           {/* Pricing Cards */}
           <div className="grid w-full max-w-5xl grid-cols-1 place-items-center gap-6 md:gap-8">
-          {pricingData.plans.map((plan) => {
+            {pricingData.plans.map((plan) => {
               const isAnnual = billingCycle === "anual"
               const displayedPrice = isAnnual
-                ? plan.annualPricePerMonth[country]
-                : plan.monthlyPrice[country]
+                ? plan.annualPricePerMonth[currency]
+                : plan.monthlyPrice[currency]
 
               const savings = calculateSavings(plan)
 
               const formattedPrice = new Intl.NumberFormat("es-AR").format(displayedPrice)
               const formattedMonthlyPrice = new Intl.NumberFormat("es-AR").format(
-                plan.monthlyPrice[country]
+                plan.monthlyPrice[currency]
               )
 
-              const whatsappLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
-                whatsappMessages[country]
+              const whatsappLink = `https://wa.me/${whatsappNumbers[whatsappCountry]}?text=${encodeURIComponent(
+                whatsappMessages[whatsappCountry]
               )}`
 
               return (
@@ -158,7 +157,7 @@ export function PricingSection3() {
                   className="relative overflow-hidden transition-all border border-gray-900 shadow-md"
                 >
                   <CardContent className="flex flex-col gap-8 p-8">
-                    
+
                     {/* Header */}
                     <div className="flex flex-col gap-4 pt-4">
                       <div className="flex flex-col gap-2">
@@ -172,7 +171,7 @@ export function PricingSection3() {
                       <div className="flex flex-col">
                         <div className="flex items-end gap-1">
                           <span className="text-5xl font-bold text-gray-900">
-                            {currencySymbol[country]}{formattedPrice}
+                            {currencySymbol[currency]}{formattedPrice}
                           </span>
                           <span className="text-lg text-gray-600 mb-2">/mes</span>
                         </div>
@@ -180,7 +179,7 @@ export function PricingSection3() {
                         {isAnnual && (
                           <div className="flex items-center gap-2 mt-1">
                             <span className="text-sm text-gray-500 line-through">
-                              {currencySymbol[country]}{formattedMonthlyPrice}/mes
+                              {currencySymbol[currency]}{formattedMonthlyPrice}/mes
                             </span>
                             <span className="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
                               -{savings}%
@@ -189,29 +188,20 @@ export function PricingSection3() {
                         )}
 
                         <span className="text-xs text-gray-500 mt-1">
-                          {currencySuffix[country]}
+                          {currencySuffix[currency]}
                         </span>
 
                         {isAnnual && (
                           <p className="text-xs text-gray-600 mt-2 bg-gray-100 px-3 py-2 rounded-md">
                             💰 Pago anual:{" "}
-                            {currencySymbol[country]}
+                            {currencySymbol[currency]}
                             {new Intl.NumberFormat("es-AR").format(displayedPrice * 12)}{" "}
-                            {currencySuffix[country]}
+                            {currencySuffix[currency]}
                           </p>
                         )}
                       </div>
 
-                      {/* CTA — WhatsApp (Stripe comentado) */}
-                      {/*
-                      <Button
-                        className="w-full font-semibold py-6 transition-all bg-white text-gray-900 border-2 border-gray-900 hover:bg-yellow-500 hover:text-gray-900 hover:shadow-lg"
-                        onClick={() => handleCheckout(plan.name)}
-                      >
-                        Comenzar ahora →
-                      </Button>
-                      */}
-
+                      {/* CTA WhatsApp */}
                       <Button
                         asChild
                         className="w-full font-semibold py-6 transition-all bg-yellow-500 text-gray-900 border-2 border-gray-900 hover:bg-gray-900 hover:text-white hover:shadow-lg"
@@ -250,13 +240,13 @@ export function PricingSection3() {
                         ))}
                       </div>
                     </div>
+
                   </CardContent>
                 </Card>
               )
             })}
           </div>
 
-          {/* Footer text */}
           <p className="text-sm text-gray-500 text-center max-w-2xl">
             🎁 <span className="font-semibold">Prueba gratis por 7 días</span> · Cancela cuando quieras
           </p>

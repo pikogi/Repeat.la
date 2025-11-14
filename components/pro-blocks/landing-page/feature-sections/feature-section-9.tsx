@@ -1,14 +1,13 @@
 "use client"
 
 import { useRef, useState, useEffect } from "react"
-import { Tagline } from "@/components/pro-blocks/landing-page/tagline"
 import { Button } from "@/components/ui/button"
 import { getUserCountry } from "@/geolocation"
 
 export function FeatureSection9() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [country, setCountry] = useState<"ar" | "mx" | "us">("ar")
+  const [country, setCountry] = useState<"ar" | "mx" | "us" | string>("ar")
 
   const handlePlay = () => {
     if (videoRef.current) {
@@ -24,9 +23,17 @@ export function FeatureSection9() {
   }
 
   useEffect(() => {
-    getUserCountry().then((c) => {
-      if (c === "ar" || c === "mx" || c === "us") setCountry(c)
-    })
+    const urlParams = new URLSearchParams(window.location.search)
+    const paramCountry = urlParams.get("country")?.toLowerCase()
+
+    if (paramCountry === "ar" || paramCountry === "mx" || paramCountry === "us") {
+      setCountry(paramCountry)
+    } else {
+      getUserCountry().then((c) => {
+        if (c === "ar" || c === "mx" || c === "us") setCountry(c)
+        else setCountry("mx") // fallback si quieres MX por defecto
+      })
+    }
   }, [])
 
   const whatsappNumbers: Record<string, string> = {
@@ -39,23 +46,29 @@ export function FeatureSection9() {
     ar: "¡Hola! Quiero Comenzar mi prueba gratuita.",
   }
 
-  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
-    whatsappMessages[country]
-  )}`
+  // Países permitidos
+  const allowedCountries = ["ar", "mx"] as const
+
+  // Si el país no está permitido, usar "mx" (o "ar", lo que prefieras)
+  const userCountry =
+    allowedCountries.includes(country as any) ? country : "mx"
+
+  // 👈 aquí ahora usamos userCountry (corregido)
+  const pruebaGratisLink = `https://wa.me/${
+    whatsappNumbers[userCountry]
+  }?text=${encodeURIComponent(whatsappMessages[userCountry])}`
 
   return (
     <section className="bg-gray-100 section-padding-y border-b" id="how-it-works">
       <div className="md:container container-padding-x mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-20 items-center">
           
-          {/* Texto: arriba en mobile, a la derecha en desktop */}
           <div className="flex flex-col md:flex-none md:col-span-1 items-center md:items-start order-1 md:order-2">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center md:text-center text-black underline decoration-4 decoration-black underline-offset-8 mb-0 md:mb-0 leading-normal lg:leading-relaxed">
               <span className="block mb-2">REPEAT</span>
               <span className="block">EN ACCION.</span>
             </h1>
 
-            {/* Botón para desktop */}
             <div className="hidden md:flex md:mt-6 md:justify-center w-full">
               <Button
                 asChild
@@ -68,7 +81,6 @@ export function FeatureSection9() {
             </div>
           </div>
 
-          {/* Video */}
           <div className="md:col-span-2 flex flex-col items-center order-2 md:order-1">
             <div className="relative w-full overflow-hidden rounded-xl shadow-lg md:-ml-10 flex items-center justify-center bg-black md:mt-0">
               <video
@@ -97,7 +109,6 @@ export function FeatureSection9() {
               )}
             </div>
 
-            {/* Botón debajo del video en mobile */}
             <div className="mt-20 md:mt-0 md:hidden flex justify-center w-full">
               <Button
                 asChild

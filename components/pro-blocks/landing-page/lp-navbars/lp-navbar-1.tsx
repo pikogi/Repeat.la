@@ -140,7 +140,8 @@ export function LpNavbar1() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { country } = useCountry();
-
+  const selectedCountry = ["mx", "ar"].includes(country) ? country : "mx";
+  
   const whatsappNumbers: Record<string, string> = {
     mx: "5215543219876",
     ar: "5491150389694",
@@ -151,9 +152,10 @@ export function LpNavbar1() {
     ar: "¡Hola! Quiero comenzar mi prueba gratuita.",
   };
 
-  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
-    whatsappMessages[country]
+  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[selectedCountry]}?text=${encodeURIComponent(
+    whatsappMessages[selectedCountry]
   )}`;
+  
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);

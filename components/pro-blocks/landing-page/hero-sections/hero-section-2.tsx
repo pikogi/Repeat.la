@@ -8,22 +8,26 @@ import { useCountry } from "@/app/context/CountryContext";
 export function HeroSection2() {
   const { country } = useCountry();
 
+  // Países permitidos
+  const validCountries = ["mx", "ar"];
+
+  // Si el país no está en la lista, usar México como fallback
+  const selectedCountry = validCountries.includes(country) ? country : "mx";
+
   const whatsappNumbers: Record<string, string> = {
     mx: "5215543219876",
     ar: "5491150389694",
-    us: "1234567890",
   };
 
   const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero comenzar mi prueba gratuita desde México.",
-    ar: "¡Hola! Quiero comenzar mi prueba gratuita desde Argentina.",
-    us: "Hi! I want to start my free trial from the USA.",
+    mx: "¡Hola! Quiero comenzar mi prueba gratuita.",
+    ar: "¡Hola! Quiero comenzar mi prueba gratuita.",
   };
 
-  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
-    whatsappMessages[country]
+  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[selectedCountry]}?text=${encodeURIComponent(
+    whatsappMessages[selectedCountry]
   )}`;
-  
+
   return (
     <section
       className="relative bg-secondary overflow-hidden pt-32 pb-16 lg:h-screen lg:pt-32 lg:pb-0 flex items-center"

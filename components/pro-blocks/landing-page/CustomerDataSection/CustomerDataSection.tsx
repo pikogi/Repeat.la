@@ -8,6 +8,12 @@ import { useCountry } from "@/app/context/CountryContext"
 export function CustomerDataSection() {
   const { country } = useCountry(); // "ar" | "mx" | "us"
 
+  // Países permitidos
+  const validCountries = ["mx", "ar"];
+
+  // Si el país no es reconocido → usar México
+  const selectedCountry = validCountries.includes(country) ? country : "mx";
+
   const whatsappNumbers: Record<string, string> = {
     mx: "5215543219876",
     ar: "5491150389694",
@@ -18,13 +24,13 @@ export function CustomerDataSection() {
     ar: "¡Hola! Quiero mi propio Club de Fidelidad.",
   };
 
-  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
-    whatsappMessages[country]
+  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[selectedCountry]}?text=${encodeURIComponent(
+    whatsappMessages[selectedCountry]
   )}`;
 
   return (
     <section className="bg-background section-padding-y border-b">
-      {/* Tagline y título centrados arriba */}
+      {/* Tagline y título */}
       <div className="container mx-auto px-4 md:px-6 text-center mb-10 flex flex-col items-center">
         <Tagline className="text-red-500 text-lg md:text-xl">
           Herramienta de Marketing
@@ -34,9 +40,10 @@ export function CustomerDataSection() {
         </h1>
       </div>
 
-      {/* Contenedor de columnas */}
+      {/* Contenido en columnas */}
       <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row gap-10 md:gap-16 items-start">
-        {/* Columna Izquierda - Texto */}
+        
+        {/* Columna izquierda */}
         <div className="md:w-2/5 flex flex-col gap-6 md:gap-4 text-lg md:text-[1.5rem] text-foreground">
           <p>
             Una vez que el cliente se unió al club de fidelidad, tendrás acceso a un panel de control con estadísticas clave.
@@ -48,8 +55,9 @@ export function CustomerDataSection() {
             Además, tendrás acceso a la base de datos de los participantes, donde encontrarás información como su correo electrónico, WhatsApp y fecha de cumpleaños, para poder tomar acción y aumentar tus ventas.
           </p>
 
-          {/* Botón responsive debajo del texto */}
+          {/* Botón responsive */}
           <div className="mt-6 flex flex-col gap-3 md:flex-row md:gap-0 md:justify-start">
+
             {/* Mobile */}
             <div className="md:hidden w-full flex justify-center">
               <Button
@@ -76,7 +84,7 @@ export function CustomerDataSection() {
           </div>
         </div>
 
-        {/* Columna Derecha - Imagen */}
+        {/* Columna derecha */}
         <div className="md:w-3/5 flex self-center mx-auto">
           <Image
             src="/repeat2.jpg"

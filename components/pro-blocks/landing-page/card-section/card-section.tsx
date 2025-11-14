@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { useCountry } from "@/app/context/CountryContext"
 
 export function Cardsection() {
-  const { country } = useCountry(); // "ar" | "mx" | "us"
+  const { country } = useCountry(); // "ar" | "mx" | "us" | otro
 
   const whatsappNumbers: Record<string, string> = {
     mx: "5215543219876",
@@ -17,8 +17,14 @@ export function Cardsection() {
     ar: "¡Hola! Quiero comenzar mi propio Club de Fidelidad.",
   };
 
-  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
-    whatsappMessages[country]
+  // Países permitidos
+  const allowedCountries = ["ar", "mx"] as const;
+
+  // Si country NO es ar o mx → usar MX como fallback
+  const userCountry = allowedCountries.includes(country as any) ? country : "mx";
+
+  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[userCountry]}?text=${encodeURIComponent(
+    whatsappMessages[userCountry]
   )}`;
 
   return (
@@ -74,6 +80,7 @@ export function Cardsection() {
 
           {/* Botón responsive */}
           <div className="mt-6 flex flex-col gap-3 md:flex-row md:gap-0 md:justify-center">
+            
             {/* Mobile */}
             <div className="md:hidden w-full flex justify-center">
               <Button
@@ -81,7 +88,7 @@ export function Cardsection() {
                 className="text-white px-10 py-5 text-lg rounded-lg bg-black hover:bg-yellow-500 hover:text-black"
               >
                 <a href={pruebaGratisLink} target="_blank" rel="noopener noreferrer">
-                Comienza tu Prueba Gratis
+                  Comienza tu Prueba Gratis
                 </a>
               </Button>
             </div>
@@ -97,10 +104,11 @@ export function Cardsection() {
                 </a>
               </Button>
             </div>
+
           </div>
 
         </div>
       </div>
     </section>
-  )
+  );
 }

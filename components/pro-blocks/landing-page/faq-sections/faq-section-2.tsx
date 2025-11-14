@@ -18,8 +18,14 @@ export function FaqSection2() {
     ar: "¡Hola! Quiero agendar una demo.",
   };
 
-  const contactoLink = `https://wa.me/${whatsappNumbers[country]}?text=${encodeURIComponent(
-    whatsappMessages[country]
+  // Países permitidos
+  const allowedCountries = ["ar", "mx"] as const;
+
+  // Si country NO es ar o mx → usar MX como fallback
+  const userCountry = allowedCountries.includes(country as any) ? country : "mx";
+
+  const contactoLink = `https://wa.me/${whatsappNumbers[userCountry]}?text=${encodeURIComponent(
+    whatsappMessages[userCountry]
   )}`;
 
   return (
