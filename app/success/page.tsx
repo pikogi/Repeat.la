@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { CheckCircle2, Sparkles, ArrowRight, Download, Mail, Loader2 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 interface StripeSessionData {
@@ -23,7 +23,7 @@ interface StripeSessionData {
   intervalCount: number;
 }
 
-export default function SuccessPage() {
+function SuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   
@@ -422,5 +422,24 @@ export default function SuccessPage() {
         />
       ))}
     </main>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center"
+        >
+          <Loader2 className="w-16 h-16 text-green-600 animate-spin mx-auto mb-4" />
+          <p className="text-lg text-gray-600">Cargando...</p>
+        </motion.div>
+      </main>
+    }>
+      <SuccessContent />
+    </Suspense>
   );
 }
