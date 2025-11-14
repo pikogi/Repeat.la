@@ -185,7 +185,7 @@ function SuccessContent() {
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Error</h1>
           <p className="text-gray-600 mb-6">{error || "No se pudo cargar la información"}</p>
-          
+          <a
             href="/"
             className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-all"
           >
@@ -374,7 +374,7 @@ function SuccessContent() {
             <Mail className="w-4 h-4" />
             <p>
               ¿Necesitas ayuda?{" "}
-              
+              <a
                 href="mailto:soporte@tuempresa.com"
                 className="text-green-600 font-medium hover:text-green-700 underline"
               >
