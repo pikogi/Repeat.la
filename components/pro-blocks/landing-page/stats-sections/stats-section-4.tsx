@@ -19,7 +19,7 @@ export function WalletCallout() {
 
         <div className="flex gap-6 items-center">
           <Link
-            href="https://app.repeat.la/tester-restaurant/pos/61c0658be9d8960ab9e789cd/promo/6827f2f4fc2905dab9c7c95f"
+            href="https://app.repeat.la/cafe-moon"
             target="_blank"
             rel="noopener noreferrer"
           >

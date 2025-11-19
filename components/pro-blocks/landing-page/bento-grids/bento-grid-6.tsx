@@ -7,27 +7,27 @@ import { Tagline } from "@/components/pro-blocks/landing-page/tagline"
 const features = [
   {
     title: "",
-    description: "Expones el código QR de tu Club de Fidelidad en tu local.",
+    description: "Expones el código QR de tu Club de Fidelidad en tu local",
     icon: "/digital-loyalty-card-on-smartphone.jpg",
   },
   {
     title: "",
-    description: "Los clientes escanean el QR y completan con sus datos de contacto.",
+    description: "Los clientes escanean el QR y completan con sus datos de contacto",
     icon: "/image2.jpg",
   },
   {
     title: "",
-    description: "Descargan la tarjeta de fidelidad en su billetera virtual.",
+    description: "Descargan la tarjeta de fidelidad en su billetera virtual",
     icon: "/image8.jpg",
   },
   {
     title: "",
-    description: "Presentan su tarjeta virtual cada vez que visitan el local hasta ganar su premio.",
+    description: "Presentan su tarjeta virtual cada vez que visitan el local hasta ganar su premio",
     icon: "/image4.jpg",
   },
   {
     title: "",
-    description: "Otro cliente contento y fidelizado.",
+    description: "Otro cliente contento y fidelizado",
     icon: "/image5.jpg",
   },
 ]

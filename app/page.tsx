@@ -23,8 +23,8 @@ export default function Page() {
 
       <TestimonialsSection1
         quote="Repeat transformó completamente nuestro negocio. Ahora tenemos una base de datos de más de 500 clientes y podemos hacer campañas personalizadas."
-        authorName="María González"
-        authorRole="Dueña de Café Central"
+        authorName="Guadalupe Montero"
+        authorRole="Cafe Moon"
       />
 
       {/* ✅ Animadas con componente */}
@@ -40,8 +40,8 @@ export default function Page() {
 
       <TestimonialsSection1
         quote="La implementación fue súper rápida y nuestros clientes aman tener la tarjeta en su celular. Ya no se olvidan de traerla."
-        authorName="Carlos Martínez"
-        authorRole="Gerente de Peluquería Estilo"
+        authorName="Gaston Barreto"
+        authorRole="Barberia Gaherba"
       />
 
       <AnimatedSection className="bg-gray-50">
