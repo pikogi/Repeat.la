@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Onest } from "next/font/google";
 import "./globals.css";
 import { CountryProvider } from "./context/CountryContext";
-import Script from "next/script"; // 👈 necesario para insertar el script
+import Script from "next/script";
+import PageWithLoader from "@/components/page-loader"; // 👈 Importa el loader
 
 const onest = Onest({
   subsets: ["latin"],
@@ -29,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <head>
         {/* Google Tag Manager */}
         <Script id="gtm-script" strategy="afterInteractive">
@@ -56,7 +57,11 @@ export default function RootLayout({
           ></iframe>
         </noscript>
 
-        <CountryProvider>{children}</CountryProvider>
+        <CountryProvider>
+          <PageWithLoader>
+            {children}
+          </PageWithLoader>
+        </CountryProvider>
       </body>
     </html>
   );
