@@ -27,14 +27,15 @@ const pricingData = {
         { name: "Base de datos completa de clientes", tooltip: "Acceso a toda la información clave de tus miembros." },
         { name: "Sin necesidad de app", tooltip: "Funciona directamente en Google Wallet y Apple Wallet." },
       ],
-      monthlyPrice: { ar: 20000, mx: 400, us: 20 },
-      annualPricePerMonth: { ar: 16666, mx: 333.33, us: 16.65 },
+      monthlyPrice: { ar: 24999, mx: 499, us: 24.99 },
+      semiAnnualPricePerMonth: { ar: 17999, mx: 359, us: 17.99 },
+      annualPricePerMonth: { ar: 14999, mx: 299, us: 14.99 },
     },
   ],
 }
 
 export function PricingSection3() {
-  const [billingCycle, setBillingCycle] = useState<"mensual" | "anual">("mensual")
+  const [billingCycle, setBillingCycle] = useState<"mensual" | "anual" | "semianual">("mensual")
   const [country, setCountry] = useState<"ar" | "mx" | "us">("us")
 
   useEffect(() => {
@@ -51,19 +52,12 @@ export function PricingSection3() {
     }
   }, [])
 
-  // Países permitidos con número propio
   const allowedCountries = ["ar", "mx"] as const
-
-  // Si no es AR ni MX → WhatsApp usa Argentina
   const whatsappCountry =
     allowedCountries.includes(country as (typeof allowedCountries)[number])
       ? country
       : "mx"
 
-  // Currency:
-  // ar → ARS
-  // mx → MXN
-  // otros → USD
   const currency = country === "ar" || country === "mx" ? country : "us"
 
   const whatsappNumbers: Record<string, string> = {
@@ -94,7 +88,6 @@ export function PricingSection3() {
       <div className="container-padding-x container mx-auto">
         <div className="flex flex-col items-center gap-10 md:gap-12">
 
-          {/* Header */}
           <div className="section-title-gap-lg flex max-w-xl flex-col items-center text-center">
             <Tagline className="text-red-500 text-lg md:text-xl">
               Precios
@@ -104,8 +97,9 @@ export function PricingSection3() {
             </h2>
           </div>
 
-          {/* Toggle mensual/anual */}
+          {/* Toggle mensual / semestral / anual */}
           <div className="flex items-center gap-3 bg-white px-2 py-2 rounded-full shadow-md border border-gray-200">
+
             <button
               onClick={() => setBillingCycle("mensual")}
               className={`px-6 py-2 rounded-full font-medium transition-all ${
@@ -118,6 +112,20 @@ export function PricingSection3() {
             </button>
 
             <button
+              onClick={() => setBillingCycle("semianual")}
+              className={`px-6 py-2 rounded-full font-medium transition-all ${
+                billingCycle === "semianual"
+                  ? "bg-gray-900 text-white shadow-sm"
+                  : "text-gray-600 hover:text-gray-900"
+              }`}
+            >
+              Semestral
+              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+                Recomendado 🚀
+              </span>
+            </button>
+
+            <button
               onClick={() => setBillingCycle("anual")}
               className={`px-6 py-2 rounded-full font-medium transition-all relative ${
                 billingCycle === "anual"
@@ -126,21 +134,28 @@ export function PricingSection3() {
               }`}
             >
               Anual
-              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">
-                2 Meses Gratis!
+              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-700">
+                40% de ahorro 🔥
               </span>
             </button>
+
           </div>
 
           {/* Pricing Cards */}
           <div className="grid w-full max-w-5xl grid-cols-1 place-items-center gap-6 md:gap-8">
             {pricingData.plans.map((plan) => {
+              
+              const isMonthly = billingCycle === "mensual"
+              const isSemiAnnual = billingCycle === "semianual"
               const isAnnual = billingCycle === "anual"
-              const displayedPrice = isAnnual
-                ? plan.annualPricePerMonth[currency]
-                : plan.monthlyPrice[currency]
 
-              const savings = calculateSavings(plan)
+              let displayedPrice = plan.monthlyPrice[currency]
+
+              if (isSemiAnnual) {
+                displayedPrice = plan.semiAnnualPricePerMonth[currency]
+              } else if (isAnnual) {
+                displayedPrice = plan.annualPricePerMonth[currency]
+              }
 
               const formattedPrice = new Intl.NumberFormat("es-AR").format(displayedPrice)
               const formattedMonthlyPrice = new Intl.NumberFormat("es-AR").format(
@@ -158,7 +173,6 @@ export function PricingSection3() {
                 >
                   <CardContent className="flex flex-col gap-8 p-8">
 
-                    {/* Header */}
                     <div className="flex flex-col gap-4 pt-4">
                       <div className="flex flex-col gap-2">
                         <h3 className="text-2xl font-bold text-gray-900">{plan.name}</h3>
@@ -169,6 +183,7 @@ export function PricingSection3() {
 
                       {/* Price */}
                       <div className="flex flex-col">
+
                         <div className="flex items-end gap-1">
                           <span className="text-5xl font-bold text-gray-900">
                             {currencySymbol[currency]}{formattedPrice}
@@ -176,13 +191,10 @@ export function PricingSection3() {
                           <span className="text-lg text-gray-600 mb-2">/mes</span>
                         </div>
 
-                        {isAnnual && (
+                        {(isSemiAnnual || isAnnual) && (
                           <div className="flex items-center gap-2 mt-1">
                             <span className="text-sm text-gray-500 line-through">
                               {currencySymbol[currency]}{formattedMonthlyPrice}/mes
-                            </span>
-                            <span className="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
-                              -{savings}%
                             </span>
                           </div>
                         )}
@@ -191,8 +203,17 @@ export function PricingSection3() {
                           {currencySuffix[currency]}
                         </span>
 
+                        {isSemiAnnual && (
+                          <p className="text-xm text-gray-600 mt-2 bg-gray-100 px-3 py-2 rounded-md">
+                            💰 Pago Semestral:{" "}
+                            {currencySymbol[currency]}
+                            {new Intl.NumberFormat("es-AR").format(displayedPrice * 6)}{" "}
+                            {currencySuffix[currency]}
+                          </p>
+                        )}
+
                         {isAnnual && (
-                          <p className="text-xs text-gray-600 mt-2 bg-gray-100 px-3 py-2 rounded-md">
+                          <p className="text-xm text-gray-600 mt-2 bg-gray-100 px-3 py-2 rounded-md">
                             💰 Pago anual:{" "}
                             {currencySymbol[currency]}
                             {new Intl.NumberFormat("es-AR").format(displayedPrice * 12)}{" "}
