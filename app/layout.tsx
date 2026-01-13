@@ -46,7 +46,7 @@ export default function RootLayout({
         {/* Fin Google Tag Manager */}
       </head>
 
-      <body className={`${onest.variable} relative antialiased`}>
+      <body className={`${onest.variable} relative antialiased`} suppressHydrationWarning>
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe

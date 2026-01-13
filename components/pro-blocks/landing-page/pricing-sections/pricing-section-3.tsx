@@ -145,7 +145,7 @@ export function PricingSection3() {
 
           {/* Versión Mobile */}
           <div className="sm:hidden w-full overflow-x-auto">
-            <div className="flex items-center gap-2 bg-white px-2 py-2 rounded-full shadow-md border border-gray-200 min-w-max">
+            <div className="flex items-center gap-4 bg-white px-2 py-2 rounded-full shadow-md border border-gray-200 min-w-max">
 
               <button
                 onClick={() => setBillingCycle("mensual")}
