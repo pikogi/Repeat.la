@@ -85,7 +85,7 @@ const NavMenuItems = ({
 
             {/* Desktop submenu */}
             {!isMobile && submenu && isOpen && (
-              <div className="absolute left-0 mt-1 w-48 bg-black/90 rounded-lg shadow-lg z-50 flex flex-col animate-fade-in">
+              <div className="absolute left-0 top-full pt-2 w-48 z-50 bg-black/90 rounded-lg shadow-lg z-50 flex flex-col animate-fade-in">
                 {submenu.map((item) =>
                   isExternal(item.href) ? (
                     <Link
