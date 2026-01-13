@@ -98,7 +98,9 @@ export function PricingSection3() {
           </div>
 
           {/* Toggle mensual / semestral / anual */}
-          <div className="flex items-center gap-3 bg-white px-2 py-2 rounded-full shadow-md border border-gray-200">
+
+          {/* Versión Desktop */}
+          <div className="hidden sm:flex items-center gap-3 bg-white px-2 py-2 rounded-full shadow-md border border-gray-200">
 
             <button
               onClick={() => setBillingCycle("mensual")}
@@ -141,6 +143,55 @@ export function PricingSection3() {
 
           </div>
 
+          {/* Versión Mobile */}
+          <div className="sm:hidden w-full overflow-x-auto">
+            <div className="flex items-center gap-2 bg-white px-2 py-2 rounded-full shadow-md border border-gray-200 min-w-max">
+
+              <button
+                onClick={() => setBillingCycle("mensual")}
+                className={`px-4 py-2 rounded-full font-medium transition-all text-sm ${
+                  billingCycle === "mensual"
+                    ? "bg-gray-900 text-white shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                Mensual
+              </button>
+
+              <button
+                onClick={() => setBillingCycle("semianual")}
+                className={`px-4 py-2 rounded-full font-medium transition-all text-sm ${
+                  billingCycle === "semianual"
+                    ? "bg-gray-900 text-white shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <div className="flex flex-col items-center">
+                  <span>Semestral 🚀</span>
+                  <span className="mt-0.5 text-xs font-semibold text-green-700">
+
+                  </span>
+                </div>
+              </button>
+
+              <button
+                onClick={() => setBillingCycle("anual")}
+                className={`px-4 py-2 rounded-full font-medium transition-all text-sm ${
+                  billingCycle === "anual"
+                    ? "bg-gray-900 text-white shadow-sm"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                <div className="flex flex-col items-center">
+                  <span>Anual 🔥</span>
+                  <span className="mt-0.5 text-xs font-semibold text-red-700">
+                  </span>
+                </div>
+              </button>
+
+            </div>
+          </div>
+
           {/* Pricing Cards */}
           <div className="grid w-full max-w-5xl grid-cols-1 place-items-center gap-6 md:gap-8">
             {pricingData.plans.map((plan) => {
@@ -173,7 +224,25 @@ export function PricingSection3() {
                 >
                   <CardContent className="flex flex-col gap-8 p-8">
 
-                    <div className="flex flex-col gap-4 pt-4">
+                    <div className="flex flex-col gap-4 -mt-6">
+                      
+                      {/* Badges - Solo se muestran cuando NO es mensual */}
+                      {isSemiAnnual && (
+                        <div className="flex justify-start">
+                          <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-green-100 text-green-700">
+                            Recomendado 🚀
+                          </span>
+                        </div>
+                      )}
+                      
+                      {isAnnual && (
+                        <div className="flex justify-start">
+                          <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-semibold bg-red-100 text-red-700">
+                            40% de ahorro 🔥
+                          </span>
+                        </div>
+                      )}
+
                       <div className="flex flex-col gap-2">
                         <h3 className="text-2xl font-bold text-gray-900">{plan.name}</h3>
                         <p className="text-sm text-gray-600 leading-relaxed">
