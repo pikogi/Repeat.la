@@ -16,10 +16,10 @@ export function CustomerDataSection() {
       {/* Tagline y título */}
       <div className="container mx-auto px-4 md:px-6 text-center mb-10 flex flex-col items-center">
         <Tagline className="text-red-500 text-lg md:text-xl">
-          Herramienta de Marketing
+          Panel de Control
         </Tagline>
         <h1 className="heading-lg text-black mt-7">
-          Todos los datos de tus clientes en un solo lugar
+          Los datos de tus clientes en un solo lugar
         </h1>
       </div>
 
