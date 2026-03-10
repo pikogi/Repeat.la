@@ -32,7 +32,7 @@ export function WalletCallout() {
             />
           </Link>
           <Link
-            href="https://app.repeat.la/cafe-moon"
+            href="https://app-repeat.vercel.app/publicprogram?id=50242f9a-77f2-4918-81c4-98a3ca61af54&brand_id=327d8ea7-b30a-476f-9f3e-eca7abcf4b84"
             target="_blank"
             rel="noopener noreferrer"
           >

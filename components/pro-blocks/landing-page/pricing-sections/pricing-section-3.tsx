@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/tooltip"
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline"
 import { getUserCountry } from "@/geolocation"
+import { getWhatsAppLink } from "@/lib/whatsapp"
 
 const pricingData = {
   plans: [
@@ -52,23 +53,7 @@ export function PricingSection3() {
     }
   }, [])
 
-  const allowedCountries = ["ar", "mx"] as const
-  const whatsappCountry =
-    allowedCountries.includes(country as (typeof allowedCountries)[number])
-      ? country
-      : "mx"
-
   const currency = country === "ar" || country === "mx" ? country : "us"
-
-  const whatsappNumbers: Record<string, string> = {
-    mx: "5215543219876",
-    ar: "5491150389694",
-  }
-
-  const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quisiera comenzar ahora con mi prueba gratuita.",
-    ar: "¡Hola! Quisiera comenzar ahora con mi prueba gratuita.",
-  }
 
   const currencySymbol: Record<string, string> = { mx: "$", ar: "$", us: "$" }
   const currencySuffix: Record<string, string> = { mx: "MXN", ar: "ARS", us: "USD" }
@@ -213,9 +198,7 @@ export function PricingSection3() {
                 plan.monthlyPrice[currency]
               )
 
-              const whatsappLink = `https://wa.me/${whatsappNumbers[whatsappCountry]}?text=${encodeURIComponent(
-                whatsappMessages[whatsappCountry]
-              )}`
+              const whatsappLink = getWhatsAppLink(country, "¡Hola! Quisiera comenzar ahora con mi prueba gratuita.")
 
               return (
                 <Card

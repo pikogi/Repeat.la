@@ -4,29 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useCountry } from "@/app/context/CountryContext";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 export function HeroSection2() {
   const { country } = useCountry();
 
-  // Países permitidos
-  const validCountries = ["mx", "ar"];
-
-  // Si el país no está en la lista, usar México como fallback
-  const selectedCountry = validCountries.includes(country) ? country : "mx";
-
-  const whatsappNumbers: Record<string, string> = {
-    mx: "5215543219876",
-    ar: "5491150389694",
-  };
-
-  const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero comenzar mi prueba gratuita.",
-    ar: "¡Hola! Quiero comenzar mi prueba gratuita.",
-  };
-
-  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[selectedCountry]}?text=${encodeURIComponent(
-    whatsappMessages[selectedCountry]
-  )}`;
+  const pruebaGratisLink = getWhatsAppLink(country)
 
   return (
     <section

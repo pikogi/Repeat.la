@@ -3,19 +3,11 @@
 import { useState, useEffect } from "react";
 import { Logo } from "@/components/pro-blocks/logo";
 import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useCountry } from "@/app/context/CountryContext";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 const MENU_ITEMS = [
-  {
-    label: "Servicios",
-    submenu: [
-      { label: "Club de Lealtad", href: "https://repeat-la.vercel.app/" },
-      { label: "Encuesta de Satisfacción", href: "https://www.repeat.la/home" },
-      { label: "Catálogo", href: "https://www.repeat.la/menu-online" },
-    ],
-  },
   { label: "Cómo funciona", href: "#features" },
   { label: "Precios", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
@@ -153,21 +145,7 @@ export function LpNavbar1() {
   const [scrolled, setScrolled] = useState(false);
   const { country } = useCountry();
 
-  const selectedCountry = ["mx", "ar"].includes(country) ? country : "mx";
-
-  const whatsappNumbers: Record<string, string> = {
-    mx: "5215543219876",
-    ar: "5491150389694",
-  };
-
-  const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero comenzar mi prueba gratuita.",
-    ar: "¡Hola! Quiero comenzar mi prueba gratuita.",
-  };
-
-  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[selectedCountry]}?text=${encodeURIComponent(
-    whatsappMessages[selectedCountry]
-  )}`;
+  const pruebaGratisLink = getWhatsAppLink(country)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);

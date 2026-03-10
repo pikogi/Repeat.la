@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { getUserCountry } from "@/geolocation"
+import { getWhatsAppLink } from "@/lib/whatsapp"
 
 export function FeatureSection9() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -36,35 +37,15 @@ export function FeatureSection9() {
     }
   }, [])
 
-  const whatsappNumbers: Record<string, string> = {
-    mx: "5215543219876",
-    ar: "5491150389694",
-  }
-
-  const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero Comenzar mi prueba gratuita.",
-    ar: "¡Hola! Quiero Comenzar mi prueba gratuita.",
-  }
-
-  // Países permitidos
-  const allowedCountries = ["ar", "mx"] as const
-
-  // Si el país no está permitido, usar "mx" (o "ar", lo que prefieras)
-  const userCountry =
-    allowedCountries.includes(country as any) ? country : "mx"
-
-  // 👈 aquí ahora usamos userCountry (corregido)
-  const pruebaGratisLink = `https://wa.me/${
-    whatsappNumbers[userCountry]
-  }?text=${encodeURIComponent(whatsappMessages[userCountry])}`
+  const pruebaGratisLink = getWhatsAppLink(country, "¡Hola! Quiero Comenzar mi prueba gratuita.")
 
   return (
     <section className="bg-gray-100 section-padding-y border-b" id="how-it-works">
       <div className="md:container container-padding-x mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-20 items-center">
           
-          <div className="flex flex-col md:flex-none md:col-span-1 items-center md:items-start order-1 md:order-2">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center md:text-center text-black underline decoration-4 decoration-black underline-offset-8 mb-0 md:mb-0 leading-normal lg:leading-relaxed">
+          <div className="flex flex-col md:flex-none md:col-span-1 items-center order-1 md:order-2">
+            <h1 className="text-4xl md:text-5xl font-bold text-center md:text-center text-black underline decoration-4 decoration-black underline-offset-8 mb-0 md:mb-0 leading-normal">
               <span className="block mb-2">REPEAT</span>
               <span className="block">EN ACCION.</span>
             </h1>

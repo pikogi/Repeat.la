@@ -4,29 +4,12 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Link from "next/link";
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline";
 import { useCountry } from "@/app/context/CountryContext";
+import { getWhatsAppLink } from "@/lib/whatsapp";
 
 export function FaqSection2() {
   const { country } = useCountry(); // "ar" | "mx" | "us"
 
-  const whatsappNumbers: Record<string, string> = {
-    mx: "5215543219876",
-    ar: "5491150389694",
-  };
-
-  const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero agendar una demo.",
-    ar: "¡Hola! Quiero agendar una demo.",
-  };
-
-  // Países permitidos
-  const allowedCountries = ["ar", "mx"] as const;
-
-  // Si country NO es ar o mx → usar MX como fallback
-  const userCountry = allowedCountries.includes(country as any) ? country : "mx";
-
-  const contactoLink = `https://wa.me/${whatsappNumbers[userCountry]}?text=${encodeURIComponent(
-    whatsappMessages[userCountry]
-  )}`;
+  const contactoLink = getWhatsAppLink(country, "¡Hola! Quiero agendar una demo.")
 
   return (
     <section className="bg-gray-100 section-padding-y border-b text-black" aria-labelledby="faq-heading" id="faq">

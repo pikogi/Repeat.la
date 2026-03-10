@@ -13,12 +13,12 @@ const features = [
   {
     title: "",
     description: "Los clientes escanean el QR y completan con sus datos de contacto",
-    icon: "/image2.jpg",
+    icon: "/23.png",
   },
   {
     title: "",
     description: "Descargan la tarjeta de fidelidad en su billetera virtual",
-    icon: "/image8.jpg",
+    icon: "/image11.png",
   },
   {
     title: "",
@@ -38,8 +38,8 @@ export function ModernFeatures() {
       {/* Título y subtítulo centrados arriba */}
       <div className="section-title-gap-lg flex flex-col items-center text-center mb-16">
         <Tagline className="text-red-500 text-lg md:text-xl">¿Cómo Funciona?</Tagline>
-        <h2 className="text-black font-bold text-4xl md:text-5xl mt-7">
-          ¡Junta 6 sellos y gana un corte GRATIS!
+        <h2 className="heading-lg text-black mt-7">
+          ¡Junta 5 sellos y gana un corte GRATIS!
         </h2>
       </div>
 
@@ -48,7 +48,7 @@ export function ModernFeatures() {
         <div className="md:w-[45%] relative">
           <div className="sticky top-24">
             <Image
-              src="/image8.jpg"
+              src="image11.png"
               alt="Tarjeta Digital"
               width={550}
               height={550}
@@ -77,7 +77,7 @@ export function ModernFeatures() {
             />
             <div>
               <h3 className="text-xl md:text-2xl font-semibold text-foreground">{feature.title}</h3>
-              <p className="text-md md:text-lg text-muted-foreground">{feature.description}</p>
+              <p className="text-base md:text-lg text-muted-foreground">{feature.description}</p>
             </div>
           </motion.div>          
           ))}

@@ -3,29 +3,12 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { useCountry } from "@/app/context/CountryContext"
+import { getWhatsAppLink } from "@/lib/whatsapp"
 
 export function Cardsection() {
   const { country } = useCountry(); // "ar" | "mx" | "us" | otro
 
-  const whatsappNumbers: Record<string, string> = {
-    mx: "5215543219876",
-    ar: "5491150389694",
-  };
-
-  const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero comenzar mi propio Club de Fidelidad.",
-    ar: "¡Hola! Quiero comenzar mi propio Club de Fidelidad.",
-  };
-
-  // Países permitidos
-  const allowedCountries = ["ar", "mx"] as const;
-
-  // Si country NO es ar o mx → usar MX como fallback
-  const userCountry = allowedCountries.includes(country as any) ? country : "mx";
-
-  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[userCountry]}?text=${encodeURIComponent(
-    whatsappMessages[userCountry]
-  )}`;
+  const pruebaGratisLink = getWhatsAppLink(country, "¡Hola! Quiero comenzar mi propio Club de Fidelidad.")
 
   return (
     <section
@@ -37,9 +20,9 @@ export function Cardsection() {
 
         {/* Imagen lado izquierdo */}
         <div className="relative w-full md:w-[70%] flex justify-center md:justify-start">
-          <div className="relative w-[90%] md:w-[120%] h-[350px] md:h-[750px]">
+          <div className="relative w-[90%] md:w-[100%] h-[350px] md:h-[600px]">
             <Image
-              src="/repeat7.png"
+              src="/imagen8..png"
               alt="Vista previa de tarjetas personalizadas"
               fill
               className="rounded-2xl object-cover"
@@ -50,7 +33,7 @@ export function Cardsection() {
 
         {/* Texto lado derecho */}
         <div className="flex w-full md:w-1/2 flex-col justify-center text-center gap-6">
-          <h2 id="personaliza-tu-club" className="text-3xl md:text-5xl font-bold text-black leading-tight">
+          <h2 id="personaliza-tu-club" className="heading-lg text-black leading-tight">
             Personaliza tu club <br /> con tu identidad:
           </h2>
 

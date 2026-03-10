@@ -4,29 +4,12 @@ import Image from "next/image"
 import { Tagline } from "@/components/pro-blocks/landing-page/tagline"
 import { Button } from "@/components/ui/button"
 import { useCountry } from "@/app/context/CountryContext"
+import { getWhatsAppLink } from "@/lib/whatsapp"
 
 export function CustomerDataSection() {
   const { country } = useCountry(); // "ar" | "mx" | "us"
 
-  // Países permitidos
-  const validCountries = ["mx", "ar"];
-
-  // Si el país no es reconocido → usar México
-  const selectedCountry = validCountries.includes(country) ? country : "mx";
-
-  const whatsappNumbers: Record<string, string> = {
-    mx: "5215543219876",
-    ar: "5491150389694",
-  };
-
-  const whatsappMessages: Record<string, string> = {
-    mx: "¡Hola! Quiero mi propio Club de Fidelidad.",
-    ar: "¡Hola! Quiero mi propio Club de Fidelidad.",
-  };
-
-  const pruebaGratisLink = `https://wa.me/${whatsappNumbers[selectedCountry]}?text=${encodeURIComponent(
-    whatsappMessages[selectedCountry]
-  )}`;
+  const pruebaGratisLink = getWhatsAppLink(country, "¡Hola! Quiero mi propio Club de Fidelidad.")
 
   return (
     <section className="bg-background section-padding-y border-b">
@@ -35,7 +18,7 @@ export function CustomerDataSection() {
         <Tagline className="text-red-500 text-lg md:text-xl">
           Herramienta de Marketing
         </Tagline>
-        <h1 className="text-black font-bold text-4xl md:text-5xl mt-7">
+        <h1 className="heading-lg text-black mt-7">
           Todos los datos de tus clientes en un solo lugar
         </h1>
       </div>
@@ -44,7 +27,7 @@ export function CustomerDataSection() {
       <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row gap-10 md:gap-16 items-start">
         
         {/* Columna izquierda */}
-        <div className="md:w-2/5 flex flex-col gap-6 md:gap-4 text-lg md:text-[1.5rem] text-foreground">
+        <div className="md:w-2/5 flex flex-col gap-6 md:gap-4 text-lg md:text-xl text-foreground">
           <p>
             Una vez que el cliente se unió al club de fidelidad, tendrás acceso a un panel de control con estadísticas clave.
           </p>
@@ -87,11 +70,11 @@ export function CustomerDataSection() {
         {/* Columna derecha */}
         <div className="md:w-3/5 flex self-center mx-auto">
           <Image
-            src="/repeat2.jpg"
+            src="/repeat10.png"
             alt="Panel de Control"
             width={700}
             height={600}
-            className="rounded-xl shadow-lg object-cover w-full h-[400px] md:h-[520px]"
+            className="rounded-xl shadow-lg object-contain w-full h-auto"
           />
         </div>
       </div>

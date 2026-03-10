@@ -47,7 +47,7 @@ export function Footer1() {
           
           {/* Copyright */}
           <p className="text-center lg:text-left text-white/80">
-            Built with ❤️ in Córdoba.  All rights reserved. 2025.  
+            Built with ❤️ in Córdoba.  All rights reserved. 2026.  
             <br/>Contacto: hi@repeat.la
           </p>
 
