@@ -28,9 +28,9 @@ const pricingData = {
         { name: "Base de datos completa de clientes", tooltip: "Acceso a toda la información clave de tus miembros." },
         { name: "Sin necesidad de app", tooltip: "Funciona directamente en Google Wallet y Apple Wallet." },
       ],
-      monthlyPrice: { ar: 24999, mx: 499, us: 24.99 },
-      semiAnnualPricePerMonth: { ar: 17999, mx: 359, us: 17.99 },
-      annualPricePerMonth: { ar: 14999, mx: 299, us: 14.99 },
+      monthlyPrice: { ar: 24999, mx: 400, us: 24.99 },
+      semiAnnualPricePerMonth: { ar: 17999, mx: 289, us: 17.99 },
+      annualPricePerMonth: { ar: 14999, mx: 239, us: 14.99 },
     },
   ],
 }
