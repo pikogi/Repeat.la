@@ -217,7 +217,7 @@ export function LpNavbar1() {
                 asChild
                 className="rounded-full border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black px-[22px] py-[14px] text-sm font-medium font-bold"
               >
-                <a href="https://app.repeat.la/auth/login" target="_blank" rel="noopener noreferrer">
+                <a href="https://club.repeat.la" target="_blank" rel="noopener noreferrer">
                   Iniciar Sesión
                 </a>
               </Button>
