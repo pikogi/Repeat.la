@@ -11,7 +11,7 @@ const MENU_ITEMS = [
   { label: "Cómo funciona", href: "#features" },
   { label: "Precios", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
-  { label: "Iniciar Sesión", href: "https://app.repeat.la/auth/login" },
+  { label: "Iniciar Sesión", href: "https://club.repeat.la" },
 ] as const;
 
 const NavMenuItems = ({
